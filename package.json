@@ -15,6 +15,8 @@
     "@koa/router": "^13.1.0",
     "bcrypt": "^5.1.1",
     "koa": "^3.0.0",
+    "koa-bodyparser": "^4.4.1",
+    "koa-cors": "^0.0.16",
     "mongodb": "^6.16.0",
     "winston": "^3.17.0"
   },
