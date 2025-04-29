@@ -13,6 +13,6 @@ export const leakyBucketMiddlewareFactory = async () => {
     const repository = new MongoLeakyBucketRepository(db);
 
     // Creating an instance of the middleware and returning a function to make it easier to use and more flexible in koa
-    const leakyBucketMiddleware = new LeakyBucketMiddleware(new LeakyBucketUseCase(repository), logging);
+    const leakyBucketMiddleware = new LeakyBucketMiddleware(new LeakyBucketUseCase(repository, logging), logging);
     return (ctx: Context, next: Next) => leakyBucketMiddleware.handle(ctx, next);
 }
