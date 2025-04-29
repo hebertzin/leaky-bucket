@@ -2,6 +2,7 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import { setupUserRouter } from "./src/presentation/routes/UsersRoutes";
 import { setupAuthenticationRouter } from "./src/presentation/routes/AuthenticationRoutes";
+import { setupProtectedRouter } from "./src/presentation/routes/ProtectedRoutes";
 
 export class KoaApp {
   private koaApp: Koa;
@@ -11,13 +12,14 @@ export class KoaApp {
   }
 
   public async init(): Promise<void> {
-    //  parser post request
     this.koaApp.use(bodyParser());
 
     const authenticationRouter = await setupAuthenticationRouter()
     const userRouter = await setupUserRouter();
+    const protectedRouter = await setupProtectedRouter();
 
     this.koaApp.use(authenticationRouter.routes())
+    this.koaApp.use(protectedRouter.routes())
     this.koaApp.use(userRouter.routes());
 
   }
