@@ -3,6 +3,8 @@ import bodyParser from "koa-bodyparser";
 import { setupUserRouter } from "./src/presentation/routes/UsersRoutes";
 import { setupAuthenticationRouter } from "./src/presentation/routes/AuthenticationRoutes";
 import { setupProtectedRouter } from "./src/presentation/routes/ProtectedRoutes";
+import { leakyBucketMiddlewareFactory } from "./src/infra/factories/middlewares/LeakyBucketMiddlewareFactory";
+import { authenticationMiddlewareFactory } from "./src/infra/factories/middlewares/AuthenticationMiddlewareFactory";
 
 export class KoaApp {
   private koaApp: Koa;
@@ -14,9 +16,16 @@ export class KoaApp {
   public async init(): Promise<void> {
     this.koaApp.use(bodyParser());
 
+    
     const authenticationRouter = await setupAuthenticationRouter()
-    const userRouter = await setupUserRouter();
     const protectedRouter = await setupProtectedRouter();
+    const userRouter = await setupUserRouter();
+
+    const leakyBucketMiddleware = await leakyBucketMiddlewareFactory();
+    const autenticationMiddleware =  authenticationMiddlewareFactory();
+
+    this.koaApp.use(autenticationMiddleware)
+    this.koaApp.use(leakyBucketMiddleware)
 
     this.koaApp.use(authenticationRouter.routes())
     this.koaApp.use(protectedRouter.routes())

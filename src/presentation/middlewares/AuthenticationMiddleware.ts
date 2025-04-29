@@ -12,6 +12,10 @@ export class AuthenticationMiddleware {
 
     async isAuthorized(ctx: Context, next: Next): Promise<void> {
         try {
+            if (ctx.path.startsWith("/authentication")) {
+                return await next();
+            }
+
             const authHeader = ctx.headers['authorization'];
             const token = authHeader?.split(' ')[1];
 
@@ -22,7 +26,7 @@ export class AuthenticationMiddleware {
                 return;
             }
 
-            const payload = this.jwtService.verify(token) as string | JwtPayload;
+            const payload = this.jwtService.verify(token);
 
             if (!payload) {
                 this.logger.warn('[AuthMiddleware] Invalid or expired token');
@@ -30,9 +34,10 @@ export class AuthenticationMiddleware {
                 ctx.body = { message: 'Invalid or expired authentication token' };
                 return;
             }
-
             ctx.state.user = payload;
 
+            this.logger.info(`Payload user request middleware ${ctx}`)
+            console.log('ctx.state.user:', ctx.state.user);
             await next();
         } catch (error) {
             this.logger.error('[AuthMiddleware] Unexpected error during token verification');
