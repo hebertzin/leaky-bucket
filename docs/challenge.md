@@ -9,8 +9,8 @@ This challenge has as focus on implementing a leaky bucket strategy similar to t
 - [x] Database with docker
 - [x] Implement an authentication of users with a Bearer Token
 - [x] This token must be sent in the request Authorization
-- [ ] A multi-tenancy strategy to be the owner of requests. For example, you could have users, and each user will have 10 tokens
-- [ ] A leaky bucket strategy completed
+- [x] A multi-tenancy strategy to be the owner of requests. For example, you could have users, and each user will have 10 tokens
+- [x] A leaky bucket strategy completed
 
 - [ ] A mutation that simulates a query of a pix key
 
