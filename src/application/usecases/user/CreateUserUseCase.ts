@@ -3,7 +3,6 @@ import { Logging } from "../../../domain/Logging";
 import { UsersRepository } from "../../../domain/repository/UsersRepository";
 import { User } from "../../../domain/entities/Users";
 import { CreateUser } from "../../../domain/usecases/CreateUserUseCase";
-import { UserConfig } from "../../../config/UserConfig";
 import { AppError, UserAlreadyExist } from "../../errors/Errors";
 import { HttpStatusCode } from "../../../domain/HttpStatus";
 
@@ -26,7 +25,6 @@ export class CreateUserUseCase implements CreateUser {
             const newUser = {
                 ...user,
                 password: hashedPassword,
-                tokens: UserConfig.INITIAL_TOKENS,
             };
 
             return await this.usersRepository.save(newUser);
