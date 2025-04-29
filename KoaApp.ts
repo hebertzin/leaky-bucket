@@ -1,28 +1,25 @@
 import Koa from "koa";
-import { Db } from "mongodb";
-import userRoutes from "./src/presentation/routes/UsersRoutes";
+import bodyParser from "koa-bodyparser";
+import { setupUserRoutes } from "./src/presentation/routes/UsersRoutes";
 
 export class KoaApp {
   private koaApp: Koa;
-  readonly db: Db;
 
-  constructor(db: Db) {
+  constructor() {
     this.koaApp = new Koa();
-    this.db = db;
-
-    this.middlewares();
-    this.routes();
   }
 
-  private middlewares(): void {
-    // to  be defined
-  }
+  public async init(): Promise<void> {
+    //  parser post request
+    this.koaApp.use(bodyParser());
 
-  private routes(): void {
+    const userRoutes = await setupUserRoutes();
+
     this.koaApp.use(userRoutes.routes());
+
   }
 
-  public start(port: number | string): void {
+  public start(port: number): void {
     this.koaApp.listen(port, () => {
       console.log(`Koa server running on port ${port}`);
     });

@@ -1,16 +1,16 @@
 import { KoaApp } from "./KoaApp";
+import dotenv from "dotenv";
 import { startDatabase } from "./src/infra/database/Mongo";
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
+startDatabase()
+
 async function bootstrap() {
-  try {
-    const db = await startDatabase();
-    const app = new KoaApp(db);
-    app.start(PORT);
-  } catch (error) {
-    process.exit(1);
-  }
+  const app = new KoaApp();
+  await app.init();
+  app.start(3000);
 }
 
-bootstrap();
+bootstrap().catch(console.error);
