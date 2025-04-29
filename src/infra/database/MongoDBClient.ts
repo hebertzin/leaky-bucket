@@ -1,10 +1,10 @@
 import { MongoClient, Db } from "mongodb";
+import { Logging } from "../../domain/Logging";
 
 export class MongoDBClient {
   private static instance: MongoDBClient;
   private client: MongoClient;
   private db: Db | null = null;
-
   private constructor(private config: DatabaseConfig) {
     this.client = new MongoClient(config.uri);
   }
@@ -22,9 +22,7 @@ export class MongoDBClient {
       try {
         await this.client.connect();
         this.db = this.client.db(this.config.dbName);
-        console.log(`MongoDB connected to database: ${this.config.dbName}`);
       } catch (error) {
-        console.error("Error connecting to MongoDB:", error);
         throw error;
       }
     }
@@ -41,6 +39,5 @@ export class MongoDBClient {
   public async disconnect(): Promise<void> {
     await this.client.close();
     this.db = null;
-    console.log("MongoDB disconnected");
   }
 }
