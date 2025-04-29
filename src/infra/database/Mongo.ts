@@ -6,7 +6,7 @@ export const mongo = MongoDBClient.getInstance(dbConfig);
 
 export async function startDatabase() {
   await mongo.connect();
-  mongo.getDatabase()
+  return mongo.getDatabase()
 }
 
 startDatabase().catch(console.error);
