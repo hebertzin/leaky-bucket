@@ -1,7 +1,6 @@
 import { Db } from "mongodb";
 import { LeakyBucketRepository } from "../../../domain/repository/LeakBucketRepository";
-import { LeakyBucket } from "../../../domain/LeakBucket";
-
+import { LeakyBucket } from "../models/LeakBucket";
 
 export class MongoLeakyBucketRepository implements LeakyBucketRepository {
     constructor(private readonly db: Db) { }
