@@ -8,4 +8,5 @@ export enum HttpStatusCode {
     NoContent = 204,
     Ok = 200,
     InternalServerError = 500,
+    TooManyRequests = 429
 }
