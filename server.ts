@@ -1,13 +1,16 @@
-import Koa from "koa";
-
-const app = new Koa();
-
-app.use(async (ctx) => {
-  ctx.body = "Hello from Koa + TypeScript!";
-});
+import { KoaApp } from "./KoaApp";
+import dotenv from "dotenv";
+import { startDatabase } from "./src/infra/database/Mongo";
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+startDatabase()
+
+async function bootstrap() {
+  const app = new KoaApp();
+  await app.init();
+  app.start(3000);
+}
+
+bootstrap().catch(console.error);
