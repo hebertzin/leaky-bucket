@@ -1,5 +1,5 @@
 import Router from "@koa/router";
-import { adaptRoute } from "../../adapter/RouterAdapter";
+import { adaptRoute } from "../../adapters/KoaRouterAdapter";
 import { makeAddUserController } from "../../infra/factories/controllers/users/CreateUserControllerFactory";
 
 const userRoutes = new Router({

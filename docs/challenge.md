@@ -2,9 +2,14 @@ This challenge has as focus on implementing a leaky bucket strategy similar to t
 
 ## Deliverables
 - [x] A node js http server
-- [ ] A multi-tenancy strategy to be the owner of requests. For example, you could have users, and each user will have 10 tokens
+- [x] Koa server
+- [x] Creation of users
+- [x] Password hash
+- [x] Persistence with mongoDB
+- [x] Database with docker
 - [ ] Implement an authentication of users with a Bearer Token
 - [ ] This token must be sent in the request Authorization
+- [ ] A multi-tenancy strategy to be the owner of requests. For example, you could have users, and each user will have 10 tokens
 - [ ] A mutation that simulates a query of a pix key
 - [ ] A leaky bucket strategy completed
 
