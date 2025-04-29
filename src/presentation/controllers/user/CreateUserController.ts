@@ -1,5 +1,5 @@
 import { Request } from "koa";
-import { HttpStatusCode } from "../../../domain/HttStatus";
+import { HttpStatusCode } from "../../../domain/HttpStatus";
 import { User } from "../../../domain/entities/Users";
 import { CreateUser } from "../../../domain/usecases/CreateUserUseCase";
 import { Controller, HttpResponse } from "../../../domain/controller";

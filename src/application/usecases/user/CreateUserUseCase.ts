@@ -5,7 +5,7 @@ import { User } from "../../../domain/entities/Users";
 import { CreateUser } from "../../../domain/usecases/CreateUserUseCase";
 import { UserConfig } from "../../../config/UserConfig";
 import { AppError, UserAlreadyExist } from "../../errors/Errors";
-import { HttpStatusCode } from "../../../domain/HttStatus";
+import { HttpStatusCode } from "../../../domain/HttpStatus";
 
 export class CreateUserUseCase implements CreateUser {
     constructor(
