@@ -13,10 +13,13 @@
   "description": "",
   "dependencies": {
     "@koa/router": "^13.1.0",
+    "@types/dotenv": "^6.1.1",
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.5.0",
     "koa": "^3.0.0",
     "koa-bodyparser": "^4.4.1",
     "koa-cors": "^0.0.16",
+    "koa-router": "^13.0.1",
     "mongodb": "^6.16.0",
     "winston": "^3.17.0"
   },
@@ -24,6 +27,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/koa": "^2.15.0",
     "@types/koa__router": "^12.0.4",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-router": "^7.4.8",
     "@types/mongodb": "^4.0.6",
     "@types/winston": "^2.4.4",
     "ts-node-dev": "^2.0.0",
