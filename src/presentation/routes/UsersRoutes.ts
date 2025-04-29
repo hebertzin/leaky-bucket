@@ -6,9 +6,8 @@ const userRoutes = new Router({
     prefix: "/users",
 });
 
-userRoutes.post(
-    "/",
-    adaptRoute(makeAddUserController())
-);
-
-export default userRoutes;
+export async function setupUserRoutes() {
+    const controller = await makeAddUserController();
+    userRoutes.post("/", adaptRoute(controller));
+    return userRoutes;
+}

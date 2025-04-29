@@ -7,15 +7,14 @@ import { Controller, HttpResponse } from "../../../domain/Controller";
 export class CreateUserController implements Controller<Request> {
     constructor(private readonly createUserUseCase: CreateUser) { }
 
-    public async handle(req: Request): Promise<HttpResponse> {
+    public async handle({ ctx }: Request): Promise<HttpResponse> {
         try {
-            const user = req.ctx.body as User;
-            await this.createUserUseCase.execute(user);
-
+            const req = ctx.request.body as User;
+            await this.createUserUseCase.execute(req);
             return {
-                statusCode: HttpStatusCode.Created, 
+                statusCode: HttpStatusCode.Created,
                 msg: "User created successfully",
-                body: { email: user.email, name: user.name },
+                body: { email: req.email, name: req.name },
             };
         } catch (error: any) {
             return {
