@@ -1,6 +1,7 @@
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
-import { setupUserRoutes } from "./src/presentation/routes/UsersRoutes";
+import { setupUserRouter } from "./src/presentation/routes/UsersRoutes";
+import { setupAuthenticationRouter } from "./src/presentation/routes/AuthenticationRoutes";
 
 export class KoaApp {
   private koaApp: Koa;
@@ -13,9 +14,11 @@ export class KoaApp {
     //  parser post request
     this.koaApp.use(bodyParser());
 
-    const userRoutes = await setupUserRoutes();
+    const authenticationRouter = await setupAuthenticationRouter()
+    const userRouter = await setupUserRouter();
 
-    this.koaApp.use(userRoutes.routes());
+    this.koaApp.use(authenticationRouter.routes())
+    this.koaApp.use(userRouter.routes());
 
   }
 

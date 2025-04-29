@@ -2,12 +2,12 @@ import Router from "@koa/router";
 import { adaptRoute } from "../../adapters/KoaRouterAdapter";
 import { makeAddUserController } from "../../infra/factories/controllers/users/CreateUserControllerFactory";
 
-const userRoutes = new Router({
+const userRouter = new Router({
     prefix: "/users",
 });
 
-export async function setupUserRoutes() {
+export async function setupUserRouter() {
     const controller = await makeAddUserController();
-    userRoutes.post("/", adaptRoute(controller));
-    return userRoutes;
+    userRouter.post("/", adaptRoute(controller));
+    return userRouter;
 }
