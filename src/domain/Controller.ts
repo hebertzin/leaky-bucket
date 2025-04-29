@@ -1,8 +1,8 @@
 export interface HttpResponse {
     statusCode: number;
-    msg?: string;
+    message?: string;
     ip?: string;
-    body?: any;
+    data?: any;
 }
 
 export interface Controller<T = any> {

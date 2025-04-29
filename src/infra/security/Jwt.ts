@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { Jwt } from "../../domain/Jwt";
 
 export class JwtManager implements Jwt {
-  private readonly secretKey = process.env.SECRET as string;
+  private readonly secretKey = process.env.SECRET_JWT as string;
 
   sign(payload: string | object | Buffer, options?: jwt.SignOptions): string {
     return jwt.sign(payload, this.secretKey, options);

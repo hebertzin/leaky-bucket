@@ -11,14 +11,16 @@ export class AuthenticationController implements Controller<Request> {
             const { email, password } = ctx.request.body as { email: string, password: string };
             const { token } = await this.authenticationUseCase.execute({ email, password });
             return {
-                statusCode: HttpStatusCode.Created,
-                msg: "User log in",
-                body: token,
+                statusCode: HttpStatusCode.Ok,
+                message: "User log in",
+                data: {
+                    token: token
+                },
             };
         } catch (error: any) {
             return {
                 statusCode: error.code || HttpStatusCode.InternalServerError,
-                msg: error.message || "Unexpected error",
+                message: error.message || "Unexpected error",
             };
         }
     }
