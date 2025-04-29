@@ -27,7 +27,6 @@ export class AuthenticationMiddleware {
             }
 
             const payload = this.jwtService.verify(token);
-
             if (!payload) {
                 this.logger.warn('[AuthMiddleware] Invalid or expired token');
                 ctx.status = HttpStatusCode.Unauthorized;
@@ -35,8 +34,6 @@ export class AuthenticationMiddleware {
                 return;
             }
             ctx.state.user = payload;
-
-            this.logger.info(`Payload user request middleware ${ctx}`)
             console.log('ctx.state.user:', ctx.state.user);
             await next();
         } catch (error) {
