@@ -1,8 +1,8 @@
 import { Request } from "koa";
-import { HttpStatusCode } from "../../../domain/HttStatus";
+import { HttpStatusCode } from "../../../domain/HttpStatus";
 import { User } from "../../../domain/entities/Users";
 import { CreateUser } from "../../../domain/usecases/CreateUserUseCase";
-import { Controller, HttpResponse } from "../../../domain/controller";
+import { Controller, HttpResponse } from "../../../domain/Controller";
 
 export class CreateUserController implements Controller<Request> {
     constructor(private readonly createUserUseCase: CreateUser) { }
@@ -13,7 +13,7 @@ export class CreateUserController implements Controller<Request> {
             await this.createUserUseCase.execute(user);
 
             return {
-                statusCode: HttpStatusCode.Created,
+                statusCode: HttpStatusCode.Created, 
                 msg: "User created successfully",
                 body: { email: user.email, name: user.name },
             };
