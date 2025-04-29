@@ -1,12 +1,9 @@
 import { dbConfig } from "../../config/DbConfig";
 import { MongoDBClient } from "./MongoDBClient";
 
-
-export const mongo = MongoDBClient.getInstance(dbConfig);
-
 export async function startDatabase() {
-  await mongo.connect();
-  mongo.getDatabase()
+    const mongoClient = new MongoDBClient(dbConfig);  
+    await mongoClient.connect(); 
+    const db = mongoClient.getDatabase(); 
+    return db; 
 }
-
-startDatabase().catch(console.error);

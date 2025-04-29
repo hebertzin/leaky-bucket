@@ -15,6 +15,7 @@ export const adaptRoute = (controller: Controller) => {
                 ctx.status = response.statusCode;
                 ctx.body = {
                     message: response.msg,
+                    ip: response.ip,
                     statusCode: response.statusCode,
                 };
             }
