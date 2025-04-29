@@ -1,7 +1,7 @@
 import { Context, Next } from 'koa';
 import { Logging } from '../../domain/Logging';
 import { HttpStatusCode } from '../../domain/HttpStatus';
-import { LeakyBucketUseCase } from '../../application/usecases/leaky-bucket/LeakBucketUseCase';
+import { LeakyBucketUseCase } from '../../domain/usecases/LeakBucketUseCase';
 
 export class LeakyBucketMiddleware {
     constructor(
@@ -20,9 +20,7 @@ export class LeakyBucketMiddleware {
                 return;
             }
 
-
             await next();
-
             // Consider the request successful if HTTP status is below 400
             const success = ctx.status < 400;
 

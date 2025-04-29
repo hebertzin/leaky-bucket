@@ -7,7 +7,7 @@ const authenticationRouter = new Router({
 });
 
 export async function setupAuthenticationRouter() {
-    const controller = await makeAuthenticationController();
-    authenticationRouter.post("/", adaptRoute(controller));
+    const authenticationController = await makeAuthenticationController();
+    authenticationRouter.post("/", adaptRoute(authenticationController));
     return authenticationRouter;
 }

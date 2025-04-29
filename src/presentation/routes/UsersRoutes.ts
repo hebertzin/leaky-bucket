@@ -7,7 +7,7 @@ const userRouter = new Router({
 });
 
 export async function setupUserRouter() {
-    const controller = await makeAddUserController();
-    userRouter.post("/", adaptRoute(controller));
+    const usersController = await makeAddUserController();
+    userRouter.post("/", adaptRoute(usersController));
     return userRouter;
 }

@@ -18,7 +18,6 @@ export class AuthenticationMiddleware {
 
             const authHeader = ctx.headers['authorization'];
             const token = authHeader?.split(' ')[1];
-
             if (!token) {
                 this.logger.warn('[AuthMiddleware] Missing token in Authorization header');
                 ctx.status = HttpStatusCode.Unauthorized;

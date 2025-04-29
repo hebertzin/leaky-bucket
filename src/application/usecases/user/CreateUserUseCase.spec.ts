@@ -13,7 +13,6 @@ describe("CreateUserUseCase (using vi.mock)", () => {
     email: "test@example.com",
     name: "Test User",
     password: "plaintext-password",
-    tokens: 0,
   };
 
   beforeEach(() => {
