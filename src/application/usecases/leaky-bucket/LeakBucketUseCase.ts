@@ -1,6 +1,7 @@
 import { leakyBucketConfig } from "../../../config/LeakBucketConfig";
 import { Logging } from "../../../domain/Logging";
 import { LeakyBucketRepository } from "../../../domain/repository/LeakBucketRepository";
+
 export class LeakyBucketUseCase {
   constructor(
     private readonly repository: LeakyBucketRepository,
