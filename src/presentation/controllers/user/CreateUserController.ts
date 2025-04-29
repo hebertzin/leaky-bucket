@@ -13,13 +13,13 @@ export class CreateUserController implements Controller<Request> {
             await this.createUserUseCase.execute(req);
             return {
                 statusCode: HttpStatusCode.Created,
-                msg: "User created successfully",
-                body: { email: req.email, name: req.name },
+                message: "User created successfully",
+                data: { email: req.email, name: req.name },
             };
         } catch (error: any) {
             return {
                 statusCode: error.code || HttpStatusCode.InternalServerError,
-                msg: error.message || "Unexpected error",
+                message: error.message || "Unexpected error",
             };
         }
     }
