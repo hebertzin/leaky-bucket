@@ -7,33 +7,31 @@ import { UserConfig } from "../../../config/UserConfig";
 import { AppError, UserAlreadyExist } from "../../errors/Errors";
 import { HttpStatusCode } from "../../../domain/HttStatus";
 
-
 export class CreateUserUseCase implements CreateUser {
     constructor(
-        readonly usersRepository: UsersRepository,
-        readonly bcrypt: Hash,
-        readonly logging: Logging,
+        private readonly usersRepository: UsersRepository,
+        private readonly hashService: Hash,
+        private readonly logging: Logging,
     ) { }
 
     public async execute(user: User): Promise<User> {
-        const existentUser = await this.usersRepository.findByEmail(user.email);
-
-        if (existentUser) {
-            this.logging.warn(`[CreateUserUseCase] Attempted to create already existing user: ${existentUser.email}`);
-            throw new UserAlreadyExist("User already exist", HttpStatusCode.Conflict);
+        const existingUser = await this.usersRepository.findByEmail(user.email);
+        if (existingUser) {
+            this.logging.warn(`[CreateUserUseCase] User already exists: ${existingUser.email}`);
+            throw new UserAlreadyExist("User already exists", HttpStatusCode.Conflict);
         }
 
         try {
-            const passwordHashed = await this.bcrypt.hash(user.password)
-
-            return await this.usersRepository.save({
-                email: user.email,
-                name: user.name,
-                password: passwordHashed,
+            const hashedPassword = await this.hashService.hash(user.password);
+            const newUser = {
+                ...user,
+                password: hashedPassword,
                 tokens: UserConfig.INITIAL_TOKENS,
-            });
-        } catch (error) {
-            this.logging.error(`[CreateUserUseCase] Error creating user: ${(error as Error).message}`);
+            };
+
+            return await this.usersRepository.save(newUser);
+        } catch (err) {
+            this.logging.error(`[CreateUserUseCase] Failed to create user ${err}`);
             throw new AppError("Some error has been ocurred", HttpStatusCode.InternalServerError);
         }
     }
