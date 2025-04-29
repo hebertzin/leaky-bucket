@@ -4,6 +4,8 @@ import { UsersRepository } from "../../../domain/repository/UsersRepository";
 import { User } from "../../../domain/entities/Users";
 import { CreateUser } from "../../../domain/usecases/CreateUserUseCase";
 import { UserConfig } from "../../../config/UserConfig";
+import { AppError, UserAlreadyExist } from "../../errors/Errors";
+import { HttpStatusCode } from "../../../domain/HttStatus";
 
 
 export class CreateUserUseCase implements CreateUser {
@@ -18,7 +20,7 @@ export class CreateUserUseCase implements CreateUser {
 
         if (existentUser) {
             this.logging.warn(`[CreateUserUseCase] Attempted to create already existing user: ${existentUser.email}`);
-            throw new Error("User already exist");
+            throw new UserAlreadyExist("User already exist", HttpStatusCode.Conflict);
         }
 
         try {
@@ -32,7 +34,7 @@ export class CreateUserUseCase implements CreateUser {
             });
         } catch (error) {
             this.logging.error(`[CreateUserUseCase] Error creating user: ${(error as Error).message}`);
-            throw new Error("Some error has been ocurred");
+            throw new AppError("Some error has been ocurred", HttpStatusCode.InternalServerError);
         }
     }
 }
