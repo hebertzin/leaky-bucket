@@ -1,7 +1,7 @@
 This challenge has as focus on implementing a leaky bucket strategy similar to the leaky bucket from BACEN.
 
 ## Deliverables
-- [ ] A node js http server
+- [x] A node js http server
 - [ ] A multi-tenancy strategy to be the owner of requests. For example, you could have users, and each user will have 10 tokens
 - [ ] Implement an authentication of users with a Bearer Token
 - [ ] This token must be sent in the request Authorization
