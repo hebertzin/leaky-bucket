@@ -12,10 +12,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "koa": "^3.0.0",
     "mongodb": "^6.16.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/koa": "^2.15.0",
     "@types/mongodb": "^4.0.6",
     "ts-node-dev": "^2.0.0",
