@@ -12,11 +12,6 @@ export class LeakyBucketMiddleware {
     async handle(ctx: Context, next: Next): Promise<void> {
         try {
             const user = ctx.state.user;
-
-            if (ctx.path.startsWith("/authentication")) {
-                return await next();
-            }
-
             if (!user || !user._id) {
                 this.logger.warn('[LeakyBucket] User not found in context');
                 ctx.status = HttpStatusCode.Unauthorized;

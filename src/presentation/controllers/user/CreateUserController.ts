@@ -18,8 +18,8 @@ export class CreateUserController implements Controller<Request> {
             };
         } catch (error: any) {
             return {
-                statusCode: error.code || HttpStatusCode.InternalServerError,
-                message: error.message || "Unexpected error",
+                statusCode: error.code,
+                message: error.message,
             };
         }
     }
