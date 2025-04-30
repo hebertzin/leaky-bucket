@@ -1,4 +1,4 @@
-import { leakyBucketConfig } from "../../../config/LeakBucketConfig";
+import { leakyBucketConfig } from "../../../infra/config/LeakBucketConfig";
 import { Logging } from "../../../domain/Logging";
 import { LeakyBucketRepository } from "../../../domain/repository/LeakBucketRepository";
 

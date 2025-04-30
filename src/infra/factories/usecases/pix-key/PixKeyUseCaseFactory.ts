@@ -1,6 +1,6 @@
 import { MongoDBClient } from "../../../database/MongoDBClient";
 import { logging } from "../../../logging/Logging";
-import { dbConfig } from "../../../../config/DbConfig";
+import { dbConfig } from "../../../config/DbConfig";
 import { MongoPixKeyRepository } from "../../../database/repository/PixRepository";
 import { RegisterPixKeyUseCase } from "../../../../application/usecases/pix-key/AddPixKeyUseCase";
 

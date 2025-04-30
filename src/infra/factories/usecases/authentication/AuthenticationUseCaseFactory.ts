@@ -3,7 +3,7 @@ import { MongoUsersRepository } from "../../../database/repository/UsersReposito
 import { CreateUserUseCase } from "../../../../application/usecases/user/CreateUserUseCase";
 import { BcryptHashService } from "../../../security/Hash";
 import { logging } from "../../../logging/Logging";
-import { dbConfig } from "../../../../config/DbConfig";
+import { dbConfig } from "../../../config/DbConfig";
 import { AuthenticationUseCase } from "../../../../application/usecases/authentication/AuthenticationUseCase";
 import { JwtManager } from "../../../security/Jwt";
 

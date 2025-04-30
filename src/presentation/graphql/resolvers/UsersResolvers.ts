@@ -1,4 +1,4 @@
-import { dbConfig } from "../../../config/DbConfig";
+import { dbConfig } from "../../../infra/config/DbConfig";
 import { MongoDBClient } from "../../../infra/database/MongoDBClient";
 import { MongoUsersRepository } from "../../../infra/database/repository/UsersRepository";
 import { makeDbSaveUser } from "../../../infra/factories/usecases/users/CreateUserUseCaseFactory";
