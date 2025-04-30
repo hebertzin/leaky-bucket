@@ -7,6 +7,7 @@ import { leakyBucketMiddlewareFactory } from "./src/infra/factories/middlewares/
 import { authenticationMiddlewareFactory } from "./src/infra/factories/middlewares/AuthenticationMiddlewareFactory";
 import { ApolloServer } from "apollo-server-koa";
 import { schema } from "./src/presentation/graphql/Index";
+import { setupPixKeyRouter } from "./src/presentation/routes/PixKeyRoutes";
 
 export class KoaApp {
   private koaApp: Koa;
@@ -16,7 +17,7 @@ export class KoaApp {
     this.koaApp = new Koa();
     this.apolloServer = new ApolloServer({
       schema,
-      context: ({ ctx }) => ctx 
+      context: ({ ctx }) => ctx
     });
   }
 
@@ -26,9 +27,10 @@ export class KoaApp {
     const authenticationRouter = await setupAuthenticationRouter()
     const protectedRouter = await setupProtectedRouter();
     const userRouter = await setupUserRouter();
+    const pixKeyRouter = await setupPixKeyRouter();
 
     const leakyBucketMiddleware = await leakyBucketMiddlewareFactory();
-    const autenticationMiddleware =  authenticationMiddlewareFactory();
+    const autenticationMiddleware = authenticationMiddlewareFactory();
 
     this.koaApp.use(autenticationMiddleware)
     this.koaApp.use(leakyBucketMiddleware)
@@ -36,6 +38,7 @@ export class KoaApp {
     this.koaApp.use(authenticationRouter.routes())
     this.koaApp.use(protectedRouter.routes())
     this.koaApp.use(userRouter.routes());
+    this.koaApp.use(pixKeyRouter.routes())
 
     await this.apolloServer.start();
     this.apolloServer.applyMiddleware({ app: this.koaApp });
