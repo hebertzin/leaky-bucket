@@ -1,8 +1,11 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { typeDefs } from './schemas/Index';
-import { resolvers } from './resolvers/Index';
+import { mergeTypeDefs } from '@graphql-tools/merge';
+import { userTypeDefs } from './schemas/UserSchema';
+import { userResolvers } from './resolvers/UsersResolvers';
+
+const typeDefs = mergeTypeDefs([userTypeDefs]);
 
 export const schema = makeExecutableSchema({
-    typeDefs,
-    resolvers,
+  typeDefs,
+  resolvers: userResolvers
 });

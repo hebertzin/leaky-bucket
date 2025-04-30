@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-koa';
+import { gql } from 'graphql-tag';
 
 export const userTypeDefs = gql`
   type User {
@@ -6,14 +6,31 @@ export const userTypeDefs = gql`
     name: String!
     email: String!
     password: String!
+    createdAt: String!
+    updatedAt: String!
+  }
+
+  input CreateUserInput {
+    name: String!
+    email: String!
+    password: String!
+  }
+
+  type PixKeyInfo {
+    key: String!
+    type: String!
+    owner: String!
+    createdAt: String!
+    status: String!
   }
 
   type Query {
     users: [User!]!
-    user(id: ID!): User
+    user(email: String!): User
+    simulatePixKeyQuery(key: String!): PixKeyInfo!
   }
 
   type Mutation {
-    createUser(name: String!, email: String!, password: String!): User!
+    createUser(input: CreateUserInput!): User!
   }
 `;

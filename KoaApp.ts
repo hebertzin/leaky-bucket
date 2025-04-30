@@ -23,7 +23,6 @@ export class KoaApp {
   public async init(): Promise<void> {
     this.koaApp.use(bodyParser());
 
-    
     const authenticationRouter = await setupAuthenticationRouter()
     const protectedRouter = await setupProtectedRouter();
     const userRouter = await setupUserRouter();
@@ -37,6 +36,9 @@ export class KoaApp {
     this.koaApp.use(authenticationRouter.routes())
     this.koaApp.use(protectedRouter.routes())
     this.koaApp.use(userRouter.routes());
+
+    await this.apolloServer.start();
+    this.apolloServer.applyMiddleware({ app: this.koaApp });
 
   }
 
