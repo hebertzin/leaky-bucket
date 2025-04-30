@@ -12,7 +12,6 @@ export class LeakyBucketMiddleware {
     async handle(ctx: Context, next: Next): Promise<void> {
         try {
             const user = ctx.state.user;
-
             if (!user || !user._id) {
                 this.logger.warn('[LeakyBucket] User not found in context');
                 ctx.status = HttpStatusCode.Unauthorized;
@@ -23,7 +22,6 @@ export class LeakyBucketMiddleware {
             await next();
             // Consider the request successful if HTTP status is below 400
             const success = ctx.status < 400;
-
             this.logger.info(`[LeakyBucket] status: ${ctx.status}, success: ${success}`);
             
             // Run leaky bucket logic to decide whether to allow this user to continue making requests
