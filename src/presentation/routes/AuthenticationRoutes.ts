@@ -1,6 +1,7 @@
 import Router from "@koa/router";
 import { adaptRoute } from "../../adapters/KoaRouterAdapter";
 import { makeAuthenticationController } from "../../infra/factories/controllers/authentication/AuthenticationControllerFactory";
+import { authenticationValidatorMiddleware } from "../validators/AuthenticationValidator";
 
 const authenticationRouter = new Router({
     prefix: "/authentication",
@@ -8,6 +9,6 @@ const authenticationRouter = new Router({
 
 export async function setupAuthenticationRouter() {
     const authenticationController = await makeAuthenticationController();
-    authenticationRouter.post("/", adaptRoute(authenticationController));
+    authenticationRouter.post("/", authenticationValidatorMiddleware.validate(), adaptRoute(authenticationController));
     return authenticationRouter;
 }
