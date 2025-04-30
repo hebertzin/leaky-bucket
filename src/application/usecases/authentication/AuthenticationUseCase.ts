@@ -8,10 +8,10 @@ import { Jwt } from "../../../domain/Jwt";
 
 export class AuthenticationUseCase implements Login {
     constructor(
-        readonly usersRepository: UsersRepository,
-        readonly jwtService: Jwt,
-        readonly bcrypt: Hash,
-        readonly logging: Logging,
+        private readonly usersRepository: UsersRepository,
+        private readonly jwtService: Jwt,
+        private readonly bcrypt: Hash,
+        private readonly logging: Logging,
     ) { }
 
     public async execute(user: Authentication): Promise<Token> {

@@ -17,7 +17,7 @@ export class MongoPixKeyRepository implements PixKeyRepository {
     await this.collection.insertOne(pixKey);
   }
 
-  async deleteByKey(key: string): Promise<void> {
+  async removePixKey(key: string): Promise<void> {
     await this.collection.deleteOne({ key });
   }
 
