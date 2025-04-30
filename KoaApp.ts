@@ -5,12 +5,19 @@ import { setupAuthenticationRouter } from "./src/presentation/routes/Authenticat
 import { setupProtectedRouter } from "./src/presentation/routes/ProtectedRoutes";
 import { leakyBucketMiddlewareFactory } from "./src/infra/factories/middlewares/LeakyBucketMiddlewareFactory";
 import { authenticationMiddlewareFactory } from "./src/infra/factories/middlewares/AuthenticationMiddlewareFactory";
+import { ApolloServer } from "apollo-server-koa";
+import { schema } from "./src/presentation/graphql/Index";
 
 export class KoaApp {
   private koaApp: Koa;
+  private apolloServer: ApolloServer;
 
   constructor() {
     this.koaApp = new Koa();
+    this.apolloServer = new ApolloServer({
+      schema,
+      context: ({ ctx }) => ctx 
+    });
   }
 
   public async init(): Promise<void> {
@@ -36,6 +43,7 @@ export class KoaApp {
   public start(port: number): void {
     this.koaApp.listen(port, () => {
       console.log(`Koa server running on port ${port}`);
+      console.log(`GraphQL server ready at http://localhost:${port}${this.apolloServer.graphqlPath}`);
     });
   }
 
