@@ -4,6 +4,5 @@ import { makeDbAddPixKeyFactory } from "../../usecases/pix-key/PixKeyUseCaseFact
 
 export const makePixKeyControllerFactory = async (): Promise<Controller> => {
     const pixKeyUseCase = await makeDbAddPixKeyFactory()
-    const addPixKeyController = new PixKeyContoller(pixKeyUseCase);
-    return addPixKeyController;
+    return new PixKeyContoller(pixKeyUseCase);
 };
