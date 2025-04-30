@@ -1,5 +1,5 @@
 import { Controller } from "../../../../domain/Controller";
-import { PixKeyContoller } from "../../../../presentation/controllers/pix/PixKeyController";
+import { PixKeyContoller } from "../../../../presentation/controllers/pix-key/PixKeyController";
 import { makeDbAddPixKeyFactory } from "../../usecases/pix/PixKeyUseCaseFactory";
 
 export const makePixKeyControllerFactory = async (): Promise<Controller> => {

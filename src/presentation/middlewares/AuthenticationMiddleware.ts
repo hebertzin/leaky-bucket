@@ -12,10 +12,6 @@ export class AuthenticationMiddleware {
 
     async isAuthorized(ctx: Context, next: Next): Promise<void> {
         try {
-            if (ctx.path.startsWith("/authentication")) {
-                return await next();
-            }
-
             const authHeader = ctx.headers['authorization'];
             const token = authHeader?.split(' ')[1];
             if (!token) {

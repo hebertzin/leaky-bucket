@@ -25,6 +25,8 @@ export class KoaApp {
     this.koaApp.use(bodyParser());
 
     const authenticationRouter = await setupAuthenticationRouter()
+    this.koaApp.use(authenticationRouter.routes())
+
     const protectedRouter = await setupProtectedRouter();
     const userRouter = await setupUserRouter();
     const pixKeyRouter = await setupPixKeyRouter();
@@ -35,11 +37,10 @@ export class KoaApp {
     this.koaApp.use(autenticationMiddleware)
     this.koaApp.use(leakyBucketMiddleware)
 
-    this.koaApp.use(authenticationRouter.routes())
     this.koaApp.use(protectedRouter.routes())
     this.koaApp.use(userRouter.routes());
     this.koaApp.use(pixKeyRouter.routes())
-
+    
     await this.apolloServer.start();
     this.apolloServer.applyMiddleware({ app: this.koaApp });
 

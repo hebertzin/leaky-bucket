@@ -1,7 +1,7 @@
 import Router from "@koa/router";
 import { adaptRoute } from "../../adapters/KoaRouterAdapter";
 import { makeAuthenticationController } from "../../infra/factories/controllers/authentication/AuthebticationControllerFactory";
-import { makePixKeyControllerFactory } from "../../infra/factories/controllers/pix/PixKeyControllerFactory";
+import { makePixKeyControllerFactory } from "../../infra/factories/controllers/pix-key/PixKeyControllerFactory";
 
 const pixKeyRouter = new Router({
     prefix: "/pix/key",
