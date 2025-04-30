@@ -3,6 +3,6 @@ import { AuthenticationController } from "../../../../presentation/controllers/a
 import { makeAuthenticationUseCase } from "../../usecases/authentication/AuthenticationUseCaseFactory";
 
 export const makeAuthenticationController = async (): Promise<Controller> => {
-    const authenticationController = new AuthenticationController(await makeAuthenticationUseCase());
-    return authenticationController;
+    const authenticationUseCaseFactory = await makeAuthenticationUseCase()
+    return new AuthenticationController(authenticationUseCaseFactory);
 };

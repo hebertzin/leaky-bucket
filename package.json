@@ -12,18 +12,24 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@apollo/server": "^4.12.0",
+    "@graphql-tools/merge": "^9.0.24",
+    "@koa/cors": "^5.0.0",
     "@koa/router": "^13.1.0",
     "@types/dotenv": "^6.1.1",
+    "apollo-server-koa": "^3.13.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.5.0",
+    "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
-    "koa": "^3.0.0",
+    "koa": "^2.16.1",
     "koa-bodyparser": "^4.4.1",
     "koa-cors": "^0.0.16",
     "koa-jwt": "^4.0.4",
     "koa-router": "^13.0.1",
     "mongodb": "^6.16.0",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

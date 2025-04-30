@@ -1,6 +1,6 @@
 import { Context, Next } from "koa";
 import { LeakyBucketUseCase } from "../../../application/usecases/leaky-bucket/LeakBucketUseCase";
-import { dbConfig } from "../../../config/DbConfig";
+import { dbConfig } from "../../config/DbConfig";
 import { LeakyBucketMiddleware } from "../../../presentation/middlewares/LeakyBucketMiddleware";
 import { MongoDBClient } from "../../database/MongoDBClient";
 import { MongoLeakyBucketRepository } from "../../database/repository/LeakBucketRepository";

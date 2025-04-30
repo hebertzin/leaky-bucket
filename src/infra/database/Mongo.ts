@@ -1,4 +1,4 @@
-import { dbConfig } from "../../config/DbConfig";
+import { dbConfig } from "../config/DbConfig";
 import { MongoDBClient } from "./MongoDBClient";
 
 export async function startDatabase() {

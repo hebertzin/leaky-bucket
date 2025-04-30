@@ -1,20 +1,19 @@
 import { Request } from "koa";
 import { HttpStatusCode } from "../../../domain/HttpStatus";
-import { User } from "../../../domain/entities/Users";
-import { CreateUser } from "../../../domain/usecases/CreateUserUseCase";
 import { Controller, HttpResponse } from "../../../domain/Controller";
+import { FindPixKey } from "../../../domain/usecases/FindPixKeyUseCase";
 
-export class CreateUserController implements Controller<Request> {
-    constructor(private readonly createUserUseCase: CreateUser) { }
+export class FindPixKeyContoller implements Controller<Request> {
+    constructor(private readonly findPixKeyUseCase: FindPixKey) { }
 
     public async handle({ ctx }: Request): Promise<HttpResponse> {
         try {
-            const req = ctx.request.body as User;
-            await this.createUserUseCase.execute(req);
+            const { key } = ctx.request.query;
+            const req = await this.findPixKeyUseCase.execute(key as string);
             return {
                 statusCode: HttpStatusCode.Created,
-                message: "User created successfully",
-                data: { email: req.email, name: req.name },
+                message: "Pix key found successfully",
+                data: { type: req?.type, key: req?.key },
             };
         } catch (error: any) {
             return {
