@@ -16,7 +16,6 @@ export class CreateUserUseCase implements CreateUser {
     public async execute(user: User): Promise<User> {
         const existingUser = await this.usersRepository.findByEmail(user.email);
         if (existingUser) {
-            this.logging.warn(`[CreateUserUseCase] User already exists: ${existingUser.email}`);
             throw new UserAlreadyExist("User already exists", HttpStatusCode.Conflict);
         }
 
