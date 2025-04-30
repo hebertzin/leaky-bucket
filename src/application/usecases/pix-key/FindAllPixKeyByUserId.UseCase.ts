@@ -7,7 +7,7 @@ import { PixKey } from "../../../domain/PixKey";
 import { FindAllByUserId } from "../../../domain/usecases/FindAllByUserIdUseCase";
 
 
-export class FindPixKeyByUserIdUseCase implements FindAllByUserId {
+export class FindAllPixKeyByUserIdUseCase implements FindAllByUserId {
     constructor(
         private readonly pixKeyRepository: PixKeyRepository,
         private readonly logging: Logging
