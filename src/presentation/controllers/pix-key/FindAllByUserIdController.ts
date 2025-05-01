@@ -13,7 +13,7 @@ export class FindAllPixKeyByUserIdContoller implements Controller<Request> {
             return {
                 statusCode: HttpStatusCode.Created,
                 message: "Pix key found successfully",
-                data: { allPixkeys },
+                data: allPixkeys,
             };
         } catch (error: any) {
             return {

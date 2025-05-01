@@ -24,7 +24,7 @@ const errorMessages: Record<z.infer<typeof PixKeyTypeEnum>, string> = {
 export const pixKeySchema = z.object({
     key: z.string(),
     type: PixKeyTypeEnum,
-    userId: z.string().uuid({ message: "Invalid userId format" }),
+    userId: z.string(),
     owner: z.string().min(1, { message: "Owner is required" }),
     bank: z.string().min(1, { message: "Bank is required" }),
 }).superRefine((data, ctx) => {
