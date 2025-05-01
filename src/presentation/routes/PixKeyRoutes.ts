@@ -4,6 +4,7 @@ import { makePixKeyController } from "../../infra/factories/controllers/pix-key/
 import { makeRemovePixKeyController } from "../../infra/factories/controllers/pix-key/RemovePixKeyControllerFactory";
 import { makeFindPixKeyController } from "../../infra/factories/controllers/pix-key/FindPixKeyControllerFactory";
 import { makeFindAllPixKeyController } from "../../infra/factories/controllers/pix-key/FindAllPixKeyByUserIdControllerFactory";
+import { pixKeyValidatorMiddleware } from "../validators/PixKeyValidator";
 
 const pixKeyRouter = new Router({
     prefix: "/pix/key",
@@ -15,7 +16,7 @@ export async function setupPixKeyRouter() {
     const findPixKeyController = await makeFindPixKeyController();
     const findAllPixKeyByUserIdController = await makeFindAllPixKeyController();
 
-    pixKeyRouter.post("/", adaptRoute(addPixKeyController));
+    pixKeyRouter.post("/", pixKeyValidatorMiddleware.validate(), adaptRoute(addPixKeyController));
     pixKeyRouter.delete("/", adaptRoute(removePixKeyController))
     pixKeyRouter.get("/", adaptRoute(findPixKeyController))
     pixKeyRouter.get("/all", adaptRoute(findAllPixKeyByUserIdController))
