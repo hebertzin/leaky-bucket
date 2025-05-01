@@ -16,7 +16,6 @@ export class FindAllPixKeyByUserIdUseCase implements FindAllByUserId {
     public async execute(userId: string): Promise<PixKey[] | null> {
         try {
             return await this.pixKeyRepository.findAllByUserId(userId);
-
         } catch (err) {
             this.logging.error(`[FindPixKeyByUserIdUseCase] Failed to found all Pix key: ${err}`);
             throw new AppError("Failed to found Pix all keys", HttpStatusCode.InternalServerError);
