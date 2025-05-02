@@ -9,6 +9,10 @@ This project provides a rate-limiting system based on the **Leaky Bucket** algor
 
 ### Prerequisites
 
+*NOTE* : If you want to consume the user's tokens you can make a series of invalid requests 
+
+*EXEMPLE* : on the route `/api/v1/pix/query` enter invalid data or without any parameter, After consuming all your tokens you will be blocked, after an hour you will have a new token and so on until you reach the token limit.
+
 Make sure the following tools are installed on your machine:
 
 - [Docker](https://www.docker.com/)
@@ -120,6 +124,8 @@ This project utilizes the following technologies:
 
 ---
 
+## All routes from here need to pass the token in the header
+  
 ### Pix Key
 
 - `GET /api/v1/pix/query/{key}`
