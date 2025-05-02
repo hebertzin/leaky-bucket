@@ -2,9 +2,6 @@ import { KoaApp } from "./KoaApp";
 import dotenv from "dotenv";
 import { startDatabase } from "./src/infra/database/Mongo";
 import { env } from "./src/infra/env/Env";
-dotenv.config();
-
-const PORT = process.env.PORT || 3000;
 
 startDatabase()
 
