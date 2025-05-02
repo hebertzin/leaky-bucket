@@ -3,9 +3,7 @@ import { Context } from "koa";
 import { HttpStatusCode } from "../../domain/HttpStatus";
 import { authenticationMiddlewareFactory } from "../../infra/factories/middlewares/AuthenticationMiddlewareFactory";
 
-const protectedRouter = new Router({
-  prefix: "/protected",
-});
+const protectedRouter = new Router();
 
 export async function setupProtectedRouter() {
   protectedRouter.get('/', async (ctx: Context) => {
