@@ -23,7 +23,7 @@ export class LeakyBucketMiddleware {
             // Consider the request successful if HTTP status is below 400
             const success = ctx.status < 400;
             this.logger.info(`[LeakyBucket] status: ${ctx.status}, success: ${success}`);
-            
+
             // Run leaky bucket logic to decide whether to allow this user to continue making requests
             // If request failed (status >= 400), a token will be consumed
             const allowed = await this.leakyBucketService.execute(user._id, success);

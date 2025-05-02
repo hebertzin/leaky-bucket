@@ -14,7 +14,7 @@ export class CreateUserController implements Controller<Request> {
             return {
                 code: HttpStatusCode.Created,
                 message: "User created successfully",
-                data: { email: req.email, name: req.name },
+                data: { id: req._id },
             };
         } catch (error: any) {
             return {
