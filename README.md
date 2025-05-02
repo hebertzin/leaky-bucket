@@ -110,9 +110,7 @@ This project utilizes the following technologies:
       "code": 201,
       "message": "User created successfully",
       "data": {
-        "id": "user_id",
-        "name": "Hebert Santos",
-        "email": "hebertsantosdeveloper@gmail.com"
+        "id": "user_id"
       }
     }
     ```
