@@ -4,7 +4,7 @@ import { Controller, HttpResponse } from "../domain/Controller";
 export const adaptRoute = (controller: Controller) => {
     return async (ctx: Context) => {
         try {
-            const { message, data, statusCode, ip }: HttpResponse = await controller.handle(ctx.request);
+            const { message, data, statusCode }: HttpResponse = await controller.handle(ctx.request);
 
             if (statusCode >= 200 && statusCode <= 299) {
                 ctx.status = statusCode;
@@ -16,7 +16,6 @@ export const adaptRoute = (controller: Controller) => {
                 ctx.status = statusCode;
                 ctx.body = {
                     message: message,
-                    ip: ip,
                     statusCode: statusCode,
                 };
             }
