@@ -1,96 +1,207 @@
 # Leaky Bucket
 
-## 🚀 Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+## Getting Started
 
-See **[Deployment](#-deployment)** for notes on how to deploy the project on a live system.
+This project provides a rate-limiting system based on the **Leaky Bucket** algorithm to control the frequency of requests, helping prevent API abuse. The following instructions will guide you on setting up the project locally for development and testing. See **[Deployment](#-deployment)** for instructions on deploying the project to a live environment.
 
-### 📋 Prerequisites
+---
 
-Make sure you have the following tools installed on your machine:
+### Prerequisites
+
+Make sure the following tools are installed on your machine:
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
-- [Node.js](https://nodejs.org/) (for local development if needed)
+- [Node.js](https://nodejs.org/) (for local development, if needed)
 
-### 🔧 Installation
+---
 
-Step-by-step instructions to get your development environment running:
+### Installation
+
+Follow these steps to get your development environment up and running:
 
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/leaky-bucket.git
 
-# Navigate to the project directory
+# Navigate into the project directory
 cd leaky-bucket
 
-# Start the application using Docker Compose (database)
+# Start the application services using Docker Compose (includes database setup)
 docker-compose up -d
 
 # Run the development server
 npm run dev
 ```
 
-Once everything is running, the server should be available at:
+Once everything is set up, the application will be available at:
 
-```
- http://localhost:3000
-```
+- **Application Server**: [http://localhost:3000](http://localhost:3000)
+- **GraphQL Server**: [http://localhost:3000/graphql](http://localhost:3000/graphql)
 
-And Graphql server 
+---
 
-```
-GraphQL server ready at http://localhost:3000/graphql
-```
+## Deployment
 
+To deploy this project on a live system, follow these steps:
 
-## 📦 Deployment
-
-To deploy this project on a live system:
-
-1. Make sure Docker and Docker Compose are installed.
+1. Ensure Docker and Docker Compose are installed on your server.
 2. Pull the latest version of the project.
-3. Run `docker-compose up -d` to start the services.
-4. Configure environment variables if needed.
+3. Run `docker-compose up -d` to start all services.
+4. Configure any environment variables if needed.
+5. The application will now be accessible via your domain.
+6. 
+---
 
-## 🛠️ Built With
+## Built With
+
+This project utilizes the following technologies:
 
 - [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
+- [Husky](https://nodejs.org/)
 - [Docker](https://www.docker.com/)
 - [Koa](https://koajs.com/)
-- [Zod](https://koajs.com/)
+- [Zod](https://zod.dev/)
 - [GraphQL](https://graphql.org/)
-- [TypeScript](https://www.typescriptlang.org/) *(if applicable)*
+- [TypeScript](https://www.typescriptlang.org/)
 
+---
 
-### Routes of the application:
+## API Routes
 
-- **Authentication Routes**: Details the routes for user login and authentication.
-- **User Routes**: Includes routes for creating, retrieving, and manipulating users.
-- **Pix key routes**: Example of how to document routes for manipulating products.
+### Authentication
 
-# API Routes
+- `POST /api/v1/authentication`
+  - **Description**: Authenticate a user and return a JWT token.
+  - **Request Example**:
+    ```json
+    {
+      "email": "user@example.com",
+      "password": "password123"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "code": 200,
+      "message": "Authentication successful",
+      "token": "jwt_token"
+    }
+    ```
 
-## Authentication
+---
 
-- `POST /api/v1/authentication` - Authenticate a user and return a JWT token.
+### Users
 
-## Users
+- `POST /api/v1/users`
+  - **Description**: Create a new user.
+  - **Request Example**:
+    ```json
+    {
+      "name": "Hebert Santos",
+      "email": "hebertsantosdeveloper@gmail.com",
+      "password": "20304050"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "code": 201,
+      "message": "User created successfully",
+      "data": {
+        "id": "user_id",
+        "name": "Hebert Santos",
+        "email": "hebertsantosdeveloper@gmail.com"
+      }
+    }
+    ```
 
-- `POST /api/v1/users` - Create a new user.
+---
 
-## Pix key
+### Pix Key
 
-- `GET /api/v1/pix/query/{key}` - Get a pix key by key.
-- `POST /api/v1/pix/query` - Create a new pix key.
-- `GET /api/v1/pix/query?userId={userId}` - Get a list of pix keys by user ID.
-- `DELETE /api/v1/pix/query/{key}` - Delete a pix key by key.
+- `GET /api/v1/pix/query/{key}`
+  - **Description**: Retrieve a Pix key by its value.
+  - **Response**:
+    ```json
+    {
+      "code": 200,
+      "message": "Pix key retrieved successfully",
+      "data": {
+        "key": "hebertzinmariana0704@gmail.com",
+        "type": "EMAIL",
+        "bank": "Inter"
+      }
+    }
+    ```
 
-## Leaky bucket implementation
+- `POST /api/v1/pix/query`
+  - **Description**: Create a new Pix key.
+  - **Request Example**:
+    ```json
+    {
+      "key": "hebertzinmariana0704@gmail.com",
+      "type": "EMAIL",
+      "bank": "Inter"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "code": 201,
+      "message": "Pix key created successfully",
+      "data": {
+        "type": "EMAIL",
+        "key": "hebertzinmariana0704@gmail.com"
+      }
+    }
+    ```
+  > The `userId` and `owner` fields are automatically populated based on the authenticated user.
 
-# Documentação do Sistema de Rate Limiting - Leaky Bucket
+- `GET /api/v1/pix/query/all`
+  - **Description**: Retrieve a list of Pix keys associated with the authenticated user.
+  - **Response**:
+    ```json
+    {
+      "code": 200,
+      "message": "Pix keys retrieved successfully",
+      "data": [
+        {
+          "key": "hebertzinmariana0704@gmail.com",
+          "type": "EMAIL",
+          "bank": "Inter"
+        }
+      ]
+    }
+    ```
+
+- `DELETE /api/v1/pix/query/{key}`
+  - **Description**: Delete a Pix key by its value.
+  - **Response**:
+    ```json
+    {
+      "code": 200,
+      "message": "Pix key deleted successfully"
+    }
+    ```
+
+---
+
+## Leaky Bucket Rate Limiting
+
+The **Leaky Bucket** algorithm is used to manage request frequency. It allows requests at a constant rate, while excess requests overflow. The algorithm operates as follows:
+
+1. **If the request is successful**, it does not consume any tokens.
+2. **If the request fails**, it consumes 1 token from the bucket.
+3. **Tokens** are replenished gradually (1 token per hour).
+
+### Behavior
+
+- **Success Requests**: No tokens consumed.
+- **Failure Requests**: 1 token is consumed for each failed request.
+
+### Leaky Bucket Flow (Diagram)
 
 ```mermaid
 graph TD
@@ -105,20 +216,14 @@ graph TD
     H -->|No| J[429 Too Many Requests]
 ```
 
-This System that controls the frequency of requests using the Leaky Bucket pattern:
+---
 
-Objective 
-- Prevent API abuse
-- Mechanism: Tokens are gradually replenished (1 per hour)
+## Authors
 
-Behavior
-- Successes: Do not consume tokens
-- Failures: Tokens consume 1
+- **Hebert Santos** – *Initial work* – [@hebertzin](https://github.com/hebertzin)
 
-## ✒️ Authors
+---
 
-- **Hebert santos** – *Initial work* – [@hebertzin](https://github.com/hebertzin)
+## License
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/yourusername/leaky-bucket/blob/main/LICENSE) file for details.
+This project is licensed under the **MIT License**. See the [LICENSE.md](https://github.com/yourusername/leaky-bucket/blob/main/LICENSE) file for more details.
