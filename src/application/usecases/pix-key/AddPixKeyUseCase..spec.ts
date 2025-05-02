@@ -3,17 +3,10 @@ import { PixKeyRepository } from "../../../domain/repository/PixRepository";
 import { Logging } from "../../../domain/Logging";
 import { PixKeyAlreadyExist, AppError } from "../../errors/Errors";
 import { RegisterPixKeyUseCase } from "./AddPixKeyUseCase";
-import { PixKey } from "../../../domain/PixKey";
+import { mockPixKey } from "./__mocks__/MockPixKey";
+
 
 describe("RegisterPixKeyUseCase", () => {
-    const mockPixKey: PixKey = {
-        bank: "Banco itau",
-        owner: "Hebert santos",
-        key: "hebert santos developer@gmail.com",
-        type: "EMAIL",
-        userId: "2939484485743"
-    };
-
     let pixKeyRepository: PixKeyRepository;
     let logging: Logging;
     let useCase: RegisterPixKeyUseCase;

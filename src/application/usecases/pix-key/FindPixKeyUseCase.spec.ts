@@ -4,20 +4,14 @@ import type { PixKeyRepository } from "../../../domain/repository/PixRepository"
 import type { Logging } from "../../../domain/Logging";
 import { AppError, NotFound } from "../../errors/Errors";
 import { PixKey } from "../../../domain/PixKey";
+import { mockPixKey } from "./__mocks__/MockPixKey";
 
 describe("FindPixKeyUseCase", () => {
     let pixKeyRepository: PixKeyRepository;
     let logging: Logging;
     let useCase: FindPixKeyUseCase;
 
-    const key = "test-key";
-    const mockPixKey: PixKey = {
-        key: key,
-        type: "EMAIL",
-        userId: "0399494933",
-        owner: "Hebert santos",
-        bank: "Banco itau"
-    };
+    const key = "30039494495";
 
     beforeEach(() => {
         pixKeyRepository = {

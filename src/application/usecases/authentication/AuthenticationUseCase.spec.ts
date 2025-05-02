@@ -5,20 +5,10 @@ import { Jwt } from "../../../domain/Jwt";
 import { Hash } from "../../../domain/Hash";
 import { Logging } from "../../../domain/Logging";
 import { NotFound, InvalidCredentials, AppError } from "../../errors/Errors";
+import { mockUser } from "../user/__mocks__/MockUser";
+import { authenticateMock } from "./__mocks__/AuthenticationMock";
 
 describe("AuthenticationUseCase", () => {
-    const mockUser = {
-        id: "1",
-        name: "Hebert santos",
-        email: "hebertsantosdeveloper@gmail.com",
-        password: "hashed-password"
-    };
-
-    const input = {
-        email: "hebertsantosdeveloper@gmail.com",
-        password: "20304050"
-    };
-
     let usersRepository: UsersRepository;
     let jwtService: Jwt;
     let hash: Hash;
@@ -50,7 +40,7 @@ describe("AuthenticationUseCase", () => {
         vi.mocked(hash.compare).mockResolvedValue(true);
         vi.mocked(jwtService.sign).mockReturnValue("jwt-token");
 
-        const result = await useCase.execute(input);
+        const result = await useCase.execute(authenticateMock);
 
         expect(result).toEqual({ token: "jwt-token" });
     });
@@ -58,14 +48,14 @@ describe("AuthenticationUseCase", () => {
     it("Should throw NotFound if the user does not exist", async () => {
         vi.mocked(usersRepository.findByEmail).mockResolvedValue(null);
 
-        await expect(useCase.execute(input)).rejects.toThrow(NotFound);
+        await expect(useCase.execute(authenticateMock)).rejects.toThrow(NotFound);
     });
 
     it("Should throw InvalidCredentials if password is incorrect", async () => {
         vi.mocked(usersRepository.findByEmail).mockResolvedValue(mockUser);
         vi.mocked(hash.compare).mockResolvedValue(false);
 
-        await expect(useCase.execute(input)).rejects.toThrow(InvalidCredentials);
+        await expect(useCase.execute(authenticateMock)).rejects.toThrow(InvalidCredentials);
     });
 
     it("Should throw AppError if error occurs while generating token", async () => {
@@ -75,7 +65,7 @@ describe("AuthenticationUseCase", () => {
             throw new Error("Token error");
         });
 
-        await expect(useCase.execute(input)).rejects.toThrow(AppError);
+        await expect(useCase.execute(authenticateMock)).rejects.toThrow(AppError);
         expect(logging.error).toHaveBeenCalled();
     });
 });
