@@ -8,16 +8,16 @@ export class FindAllPixKeyByUserIdContoller implements Controller<Request> {
 
     public async handle({ ctx }: Request): Promise<HttpResponse> {
         try {
-            const { userId } = ctx.state.user._id;
+            const userId = ctx.state.user._id;
             const allPixkeys = await this.findAllByUserId.execute(userId);
             return {
-                statusCode: HttpStatusCode.Ok,
-                message: "Pix key found successfully",
+                code: HttpStatusCode.Ok,
+                message: "Pix keys retrieved successfully",
                 data: allPixkeys,
             };
         } catch (error: any) {
             return {
-                statusCode: error.code,
+                code: error.code,
                 message: error.message,
             };
         }

@@ -20,13 +20,13 @@ export class PixKeyContoller implements Controller<Request> {
 
             await this.addPixKeyUseCase.execute(pixKey);
             return {
-                statusCode: HttpStatusCode.Created,
+                code: HttpStatusCode.Created,
                 message: "Pix key created successfully",
                 data: { type: pixKey.type, key: pixKey.key },
             };
         } catch (error: any) {
             return {
-                statusCode: error.code,
+                code: error.code,
                 message: error.message,
             };
         }

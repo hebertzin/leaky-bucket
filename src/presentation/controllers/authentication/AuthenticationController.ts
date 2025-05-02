@@ -11,15 +11,15 @@ export class AuthenticationController implements Controller<Request> {
             const { email, password } = ctx.request.body as { email: string, password: string };
             const { token } = await this.authenticationUseCase.execute({ email, password });
             return {
-                statusCode: HttpStatusCode.Ok,
-                message: "User log in",
+                code: HttpStatusCode.Ok,
+                message: "Authentication successful",
                 data: {
                     token: token
                 },
             };
         } catch (error: any) {
             return {
-                statusCode: error.code,
+                code: error.code,
                 message: error.message,
             };
         }

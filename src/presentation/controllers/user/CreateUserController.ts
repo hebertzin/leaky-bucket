@@ -12,13 +12,13 @@ export class CreateUserController implements Controller<Request> {
             const req = ctx.request.body as User;
             await this.createUserUseCase.execute(req);
             return {
-                statusCode: HttpStatusCode.Created,
+                code: HttpStatusCode.Created,
                 message: "User created successfully",
                 data: { email: req.email, name: req.name },
             };
         } catch (error: any) {
             return {
-                statusCode: error.code,
+                code: error.code,
                 message: error.message,
             };
         }

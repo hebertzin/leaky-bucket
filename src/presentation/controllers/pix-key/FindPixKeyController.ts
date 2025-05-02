@@ -2,6 +2,7 @@ import { Request } from "koa";
 import { HttpStatusCode } from "../../../domain/HttpStatus";
 import { Controller, HttpResponse } from "../../../domain/Controller";
 import { FindPixKey } from "../../../domain/usecases/FindPixKeyUseCase";
+import { http } from "winston";
 
 export class FindPixKeyContoller implements Controller<Request> {
     constructor(private readonly findPixKeyUseCase: FindPixKey) { }
@@ -11,13 +12,13 @@ export class FindPixKeyContoller implements Controller<Request> {
             const { key } = ctx.request.query;
             const req = await this.findPixKeyUseCase.execute(key as string);
             return {
-                statusCode: HttpStatusCode.Created,
-                message: "Pix key found successfully",
+                code: HttpStatusCode.Ok,
+                message: "Pix key retrieved successfully",
                 data: { type: req?.type, key: req?.key },
             };
         } catch (error: any) {
             return {
-                statusCode: error.code,
+                code: error.code,
                 message: error.message,
             };
         }

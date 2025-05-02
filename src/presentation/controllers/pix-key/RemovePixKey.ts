@@ -12,12 +12,12 @@ export class RemovePixKeyContoller implements Controller<Request> {
             const { key } = ctx.request.query;
             await this.findPixKeyUseCase.execute(key as string);
             return {
-                statusCode: HttpStatusCode.NoContent,
+                code: HttpStatusCode.NoContent,
                 message: "Pix key removed successfully",
             };
         } catch (error: any) {
             return {
-                statusCode: error.code,
+                code: error.code,
                 message: error.message,
             };
         }
