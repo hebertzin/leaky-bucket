@@ -16,13 +16,12 @@ export const adaptRoute = (controller: Controller) => {
                 ctx.status = statusCode;
                 ctx.body = {
                     message: message,
-                    statusCode: statusCode,
                 };
             }
         } catch (error: any) {
             ctx.status = error?.statusCode || 500;
             ctx.body = {
-                msg: "An unexpected error occurred.",
+                message: "An unexpected error occurred.",
                 error: error?.message || String(error),
             };
         }
