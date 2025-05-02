@@ -1,6 +1,7 @@
 import { MongoClient, Db } from "mongodb";
 import { DatabaseConfig } from "../../domain/DatabaseConfig";
 import { env } from "../env/Env";
+import { dbConfig } from "../config/DbConfig";
 
 export class MongoDBClient {
     private client: MongoClient;
@@ -8,7 +9,7 @@ export class MongoDBClient {
 
     constructor(private config: DatabaseConfig) {
         // Initialize the MongoDB client using the provided configuration (uri and dbName)
-        this.client = new MongoClient(env.MONGO_URI);
+        this.client = new MongoClient(dbConfig.uri);
     }
 
     public async connect(): Promise<void> {
