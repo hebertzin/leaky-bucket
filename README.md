@@ -3,7 +3,7 @@
 
 ## Getting Started
 
-This project provides a rate-limiting system based on the **Leaky Bucket** algorithm to control the frequency of requests, helping prevent API abuse. The following instructions will guide you on setting up the project locally for development and testing. See **[Deployment](#-deployment)** for instructions on deploying the project to a live environment.
+This project provides a rate-limiting system based on the **Leaky Bucket** algorithm to control the frequency of requests, helping prevent API abuse. The following instructions will guide you on setting up the project locally for development and testing.
 
 ---
 
