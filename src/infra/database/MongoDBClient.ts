@@ -1,5 +1,6 @@
 import { MongoClient, Db } from "mongodb";
 import { DatabaseConfig } from "../../domain/DatabaseConfig";
+import { env } from "../env/Env";
 
 export class MongoDBClient {
     private client: MongoClient;
@@ -7,7 +8,7 @@ export class MongoDBClient {
 
     constructor(private config: DatabaseConfig) {
         // Initialize the MongoDB client using the provided configuration (uri and dbName)
-        this.client = new MongoClient("mongodb://admin:203040@localhost:27017/leakBucket?authSource=admin");
+        this.client = new MongoClient(env.MONGO_URI);
     }
 
     public async connect(): Promise<void> {

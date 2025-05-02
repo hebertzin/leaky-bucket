@@ -17,9 +17,7 @@ export const userTypeDefs = gql`
   }
 
   type Query {
-    users: [User!]!
     user(email: String!): User
-    simulatePixKeyQuery(key: String!): PixKeyInfo!
   }
 
   type Mutation {

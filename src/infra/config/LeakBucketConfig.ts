@@ -1,4 +1,4 @@
 export const leakyBucketConfig = {
-    maxTokens: 10,
-    refillRate: 1,       
-  };
+  maxTokens: 10,
+  refillRate: 1,
+};
