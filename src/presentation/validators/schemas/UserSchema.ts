@@ -7,7 +7,7 @@ export const userValidationSchema = z.object({
     .min(1, { message: "Email is required" }),
   name: z.string({
     message: "Name must be a string",
-  }),
+  }).min(1, { message: "Name is required" }),
   password: z
     .string()
     .min(8, { message: "Password must be at least 8 characters long" }),

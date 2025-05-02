@@ -17,7 +17,7 @@ export class AuthenticationUseCase implements Login {
     public async execute(user: Authentication): Promise<Token> {
         const existentUser = await this.usersRepository.findByEmail(user.email);
         if (!existentUser) {
-            throw new NotFound("User does not exist, create an account", HttpStatusCode.NotFound);
+            throw new NotFound("User does not exist", HttpStatusCode.NotFound);
         }
 
         const isValidPassword = await this.bcrypt.compare(user.password, existentUser.password);

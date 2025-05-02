@@ -3,7 +3,6 @@ import { HttpStatusCode } from "../../../domain/HttpStatus";
 import { Controller, HttpResponse } from "../../../domain/Controller";
 import { RemovePixKey } from "../../../domain/usecases/RemovePixKeyUseCase";
 
-
 export class RemovePixKeyContoller implements Controller<Request> {
     constructor(private readonly findPixKeyUseCase: RemovePixKey) { }
 
