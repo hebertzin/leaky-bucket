@@ -11,7 +11,7 @@ export class FindAllPixKeyByUserIdContoller implements Controller<Request> {
             const { userId } = ctx.request.query;
             const allPixkeys = await this.findAllByUserId.execute(userId as string);
             return {
-                statusCode: HttpStatusCode.Created,
+                statusCode: HttpStatusCode.Ok,
                 message: "Pix key found successfully",
                 data: allPixkeys,
             };

@@ -1,0 +1,71 @@
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { AuthenticationUseCase } from "./AuthenticationUseCase";
+import { UsersRepository } from "../../../domain/repository/UsersRepository";
+import { Jwt } from "../../../domain/Jwt";
+import { Hash } from "../../../domain/Hash";
+import { Logging } from "../../../domain/Logging";
+import { NotFound, InvalidCredentials, AppError } from "../../errors/Errors";
+import { mockUser } from "../user/__mocks__/MockUser";
+import { authenticateMock } from "./__mocks__/AuthenticationMock";
+
+describe("AuthenticationUseCase", () => {
+    let usersRepository: UsersRepository;
+    let jwtService: Jwt;
+    let hash: Hash;
+    let logging: Logging;
+    let useCase: AuthenticationUseCase;
+
+    beforeEach(() => {
+        usersRepository = {
+            findByEmail: vi.fn()
+        } as any;
+
+        jwtService = {
+            sign: vi.fn()
+        } as any;
+
+        hash = {
+            compare: vi.fn()
+        } as any;
+
+        logging = {
+            error: vi.fn()
+        } as any;
+
+        useCase = new AuthenticationUseCase(usersRepository, jwtService, hash, logging);
+    });
+
+    it("Should authenticate and return a token", async () => {
+        vi.mocked(usersRepository.findByEmail).mockResolvedValue(mockUser);
+        vi.mocked(hash.compare).mockResolvedValue(true);
+        vi.mocked(jwtService.sign).mockReturnValue("jwt-token");
+
+        const result = await useCase.execute(authenticateMock);
+
+        expect(result).toEqual({ token: "jwt-token" });
+    });
+
+    it("Should throw NotFound if the user does not exist", async () => {
+        vi.mocked(usersRepository.findByEmail).mockResolvedValue(null);
+
+        await expect(useCase.execute(authenticateMock)).rejects.toThrow(NotFound);
+    });
+
+    it("Should throw InvalidCredentials if password is incorrect", async () => {
+        vi.mocked(usersRepository.findByEmail).mockResolvedValue(mockUser);
+        vi.mocked(hash.compare).mockResolvedValue(false);
+
+        await expect(useCase.execute(authenticateMock)).rejects.toThrow(InvalidCredentials);
+    });
+
+    it("Should throw AppError if error occurs while generating token", async () => {
+        vi.mocked(usersRepository.findByEmail).mockResolvedValue(mockUser);
+        vi.mocked(hash.compare).mockResolvedValue(true);
+        vi.mocked(jwtService.sign).mockImplementation(() => {
+            throw new Error("Token error");
+        });
+
+        await expect(useCase.execute(authenticateMock)).rejects.toThrow(AppError);
+        expect(logging.error).toHaveBeenCalled();
+    });
+});

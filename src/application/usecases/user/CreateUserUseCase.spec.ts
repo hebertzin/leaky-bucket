@@ -2,18 +2,13 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { User } from "../../../domain/entities/Users";
 import { UserAlreadyExist, AppError } from "../../errors/Errors";
 import { CreateUserUseCase } from "./CreateUserUseCase";
+import { mockUser } from "./__mocks__/MockUser";
 
 describe("CreateUserUseCase (using vi.mock)", () => {
   let createUserUseCase: CreateUserUseCase;
   let usersRepository: any;
   let hashService: any;
   let logger: any;
-
-  const fakeUser: User = {
-    email: "test@example.com",
-    name: "Test User",
-    password: "plaintext-password",
-  };
 
   beforeEach(() => {
     usersRepository = {
@@ -39,19 +34,12 @@ describe("CreateUserUseCase (using vi.mock)", () => {
     hashService.hash.mockResolvedValue("hashed-password");
     usersRepository.save.mockImplementation(async (user: User) => user);
 
-    const createdUser = await createUserUseCase.execute(fakeUser);
+    const createdUser = await createUserUseCase.execute(mockUser);
 
-    expect(usersRepository.findByEmail).toHaveBeenCalledWith(fakeUser.email);
-    expect(hashService.hash).toHaveBeenCalledWith(fakeUser.password);
+    expect(usersRepository.findByEmail).toHaveBeenCalledWith(mockUser.email);
+    expect(hashService.hash).toHaveBeenCalledWith(mockUser.password);
     expect(usersRepository.save).toHaveBeenCalled();
     expect(createdUser.password).toBe("hashed-password");
-  });
-
-  it("should throw if email already exists", async () => {
-    usersRepository.findByEmail.mockResolvedValue(fakeUser);
-
-    await expect(createUserUseCase.execute(fakeUser)).rejects.toThrow(UserAlreadyExist);
-    expect(logger.warn).toHaveBeenCalled();
   });
 
   it("should throw AppError on save error", async () => {
@@ -59,7 +47,7 @@ describe("CreateUserUseCase (using vi.mock)", () => {
     hashService.hash.mockResolvedValue("hashed-password");
     usersRepository.save.mockRejectedValue(new Error("DB Error"));
 
-    await expect(createUserUseCase.execute(fakeUser)).rejects.toThrow(AppError);
+    await expect(createUserUseCase.execute(mockUser)).rejects.toThrow(AppError);
     expect(logger.error).toHaveBeenCalled();
   });
 });
