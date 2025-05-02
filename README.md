@@ -1,5 +1,6 @@
 # Leaky Bucket
 
+#### [Leak Bucket documemtation](https://documenter.getpostman.com/view/36500427/2sB2j4gXAg)
 
 ## Getting Started
 
@@ -10,7 +11,6 @@ This project provides a rate-limiting system based on the **Leaky Bucket** algor
 ### Prerequisites
 
 Make sure the following tools are installed on your machine:
-
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [Node.js](https://nodejs.org/) (for local development, if needed)
@@ -35,6 +35,9 @@ docker-compose up -d
 npm run dev
 ```
 
+remember to fill in the .env file correctly, you can see an exemple in .env.exemple file
+
+ 
 Once everything is set up, the application will be available at:
 
 - **Application Server**: [http://localhost:3000](http://localhost:3000)
@@ -117,6 +120,8 @@ This project utilizes the following technologies:
 
 ---
 
+## All routes from here need to pass the token in the header
+  
 ### Pix Key
 
 - `GET /api/v1/pix/query/{key}`
@@ -198,6 +203,23 @@ The **Leaky Bucket** algorithm is used to manage request frequency. It allows re
 
 - **Success Requests**: No tokens consumed.
 - **Failure Requests**: 1 token is consumed for each failed request.
+
+
+*NOTE* : If you want to consume the user's tokens you can make a series of invalid requests 
+
+*EXEMPLE* : on the route `/api/v1/pix/query` enter invalid data or without any parameter, After consuming all your tokens you will be blocked, after an hour you will have a new token and so on until you reach the token limit.
+
+Real exemple
+![image](https://github.com/user-attachments/assets/baeca847-9436-416c-b401-8893808d1791)
+
+I made a series of invalid requests, and after that:
+
+![image](https://github.com/user-attachments/assets/1912cca2-c1cc-4132-84aa-3358922b38bc)
+
+My token will be zero:
+
+![image](https://github.com/user-attachments/assets/9a9227fb-3fdf-41d8-aba5-9b7efc66593e)
+
 
 ### Leaky Bucket Flow (Diagram)
 
