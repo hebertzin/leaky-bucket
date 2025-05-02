@@ -5,7 +5,7 @@ import { HttpStatusCode } from "../../src/domain/HttpStatus";
 
 let server: any;
 
-describe("Authentication E2E", () => {
+describe("/api/v1/authentication E2E", () => {
     beforeAll(async () => {
         server = await createTestApp();
     });
@@ -14,7 +14,7 @@ describe("Authentication E2E", () => {
         const response = await request(server)
             .post("/api/v1/authentication")
             .send({ email: "hebertsantosdeveloper@gmail.com", password: "20304050" });
-        expect(response.status).toBe(401);
+        expect(response.status).toBe(HttpStatusCode.Unauthorized);
         expect(response.body.message).toBe("Invalid credentials")
     });
 
@@ -63,7 +63,7 @@ describe("Authentication E2E", () => {
         const response = await request(server)
             .post("/api/v1/authentication")
             .send({ email: "hebertzin@gmail.com", password: "20304050" });
-        expect(response.body.code).toBe(200)
+        expect(response.body.code).toBe(HttpStatusCode.Ok)
         expect(response.body.message).toBe("Authentication successful")
         expect(response.body.data.token).toBeDefined()
     });

@@ -10,11 +10,11 @@ export class CreateUserController implements Controller<Request> {
     public async handle({ ctx }: Request): Promise<HttpResponse> {
         try {
             const req = ctx.request.body as User;
-            await this.createUserUseCase.execute(req);
+            const userCreated = await this.createUserUseCase.execute(req);
             return {
                 code: HttpStatusCode.Created,
                 message: "User created successfully",
-                data: { id: req._id },
+                data: { id: userCreated._id },
             };
         } catch (error: any) {
             return {
