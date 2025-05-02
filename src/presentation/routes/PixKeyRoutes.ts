@@ -6,9 +6,7 @@ import { makeFindPixKeyController } from "../../infra/factories/controllers/pix-
 import { makeFindAllPixKeyController } from "../../infra/factories/controllers/pix-key/FindAllPixKeyByUserIdControllerFactory";
 import { pixKeyValidatorMiddleware } from "../validators/PixKeyValidator";
 
-const pixKeyRouter = new Router({
-    prefix: "/pix/key",
-});
+const pixKeyRouter = new Router();
 
 export async function setupPixKeyRouter() {
     const addPixKeyController = await makePixKeyController();

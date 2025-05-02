@@ -4,26 +4,26 @@ import { Controller, HttpResponse } from "../domain/Controller";
 export const adaptRoute = (controller: Controller) => {
     return async (ctx: Context) => {
         try {
-            const { message, data, statusCode, ip }: HttpResponse = await controller.handle(ctx.request);
+            const { message, data, code }: HttpResponse = await controller.handle(ctx.request);
 
-            if (statusCode >= 200 && statusCode <= 299) {
-                ctx.status = statusCode;
+            if (code >= 200 && code <= 299) {
+                ctx.status = code;
                 ctx.body = {
+                    code,
                     message,
                     data
                 };
             } else {
-                ctx.status = statusCode;
+                ctx.status = code;
                 ctx.body = {
+                    code,
                     message: message,
-                    ip: ip,
-                    statusCode: statusCode,
                 };
             }
         } catch (error: any) {
-            ctx.status = error?.statusCode || 500;
+            ctx.status = error?.code || 500;
             ctx.body = {
-                msg: "An unexpected error occurred.",
+                message: "An unexpected error occurred.",
                 error: error?.message || String(error),
             };
         }

@@ -24,7 +24,6 @@ export class AuthenticationUseCase implements Login {
         if (!isValidPassword) {
             throw new InvalidCredentials("Invalid credentials", HttpStatusCode.Unauthorized);
         }
-
         try {
             const token = this.jwtService.sign(existentUser, { expiresIn: '1d' });
             return { token };

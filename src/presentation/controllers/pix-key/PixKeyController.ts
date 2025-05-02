@@ -9,16 +9,24 @@ export class PixKeyContoller implements Controller<Request> {
 
     public async handle({ ctx }: Request): Promise<HttpResponse> {
         try {
-            const req = ctx.request.body as PixKey;
-            await this.addPixKeyUseCase.execute(req);
+            const req = ctx.request.body as Omit<PixKey, "userId">;
+            const userId = ctx.state.user._id;
+            const owner = ctx.state.user.name;
+            const pixKey: PixKey = {
+                ...req,
+                userId,
+                owner
+            };
+
+            await this.addPixKeyUseCase.execute(pixKey);
             return {
-                statusCode: HttpStatusCode.Created,
+                code: HttpStatusCode.Created,
                 message: "Pix key created successfully",
-                data: { type: req.type, key: req.key },
+                data: { type: pixKey.type, key: pixKey.key },
             };
         } catch (error: any) {
             return {
-                statusCode: error.code,
+                code: error.code,
                 message: error.message,
             };
         }
