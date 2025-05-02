@@ -35,6 +35,9 @@ docker-compose up -d
 npm run dev
 ```
 
+remember to fill in the .env file correctly, you can see an exemple in .env.exemple file
+
+ 
 Once everything is set up, the application will be available at:
 
 - **Application Server**: [http://localhost:3000](http://localhost:3000)
