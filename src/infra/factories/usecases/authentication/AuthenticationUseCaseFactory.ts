@@ -1,6 +1,5 @@
 import { MongoDBClient } from "../../../database/MongoDBClient";
 import { MongoUsersRepository } from "../../../database/repository/UsersRepository";
-import { CreateUserUseCase } from "../../../../application/usecases/user/CreateUserUseCase";
 import { BcryptHashService } from "../../../security/Hash";
 import { logging } from "../../../logging/Logging";
 import { dbConfig } from "../../../config/DbConfig";

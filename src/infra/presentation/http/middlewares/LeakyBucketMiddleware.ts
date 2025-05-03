@@ -1,7 +1,7 @@
 import { Context, Next } from 'koa';
-import { Logging } from '../../domain/Logging';
-import { HttpStatusCode } from '../../domain/HttpStatus';
-import { LeakyBucketUseCase } from '../../domain/usecases/LeakBucketUseCase';
+import { LeakyBucketUseCase } from '../../../../domain/usecases/LeakBucketUseCase';
+import { Logging } from '../../../../domain/Logging';
+import { HttpStatusCode } from '../../../../domain/HttpStatus';
 
 export class LeakyBucketMiddleware {
     constructor(

@@ -1,5 +1,6 @@
 import { Controller } from "../../../../domain/Controller";
-import { AuthenticationController } from "../../../../presentation/controllers/authentication/AuthenticationController";
+import { AuthenticationController } from "../../../presentation/http/controllers/authentication/AuthenticationController";
+
 import { makeAuthenticationUseCase } from "../../usecases/authentication/AuthenticationUseCaseFactory";
 
 export const makeAuthenticationController = async (): Promise<Controller> => {

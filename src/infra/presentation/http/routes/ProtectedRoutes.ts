@@ -1,7 +1,6 @@
 import Router from "@koa/router";
 import { Context } from "koa";
-import { HttpStatusCode } from "../../domain/HttpStatus";
-import { authenticationMiddlewareFactory } from "../../infra/factories/middlewares/AuthenticationMiddlewareFactory";
+import { HttpStatusCode } from "../../../../domain/HttpStatus";
 
 const protectedRouter = new Router();
 

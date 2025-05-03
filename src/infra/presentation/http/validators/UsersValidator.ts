@@ -1,4 +1,4 @@
-import { DataValidator, ZodValidator } from "../../infra/adapters/KoaValidatorMiddlewareAdapter";
+import { DataValidator, ZodValidator } from "../../../adapters/KoaValidatorMiddlewareAdapter";
 import { userValidationSchema } from "./schemas/UserSchema";
 
 export const usersValidatorMiddleware = new DataValidator(

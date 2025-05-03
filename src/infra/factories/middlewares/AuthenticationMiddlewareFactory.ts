@@ -1,7 +1,7 @@
 import { Context, Next } from "koa";
-import { AuthenticationMiddleware } from "../../../presentation/middlewares/AuthenticationMiddleware";
 import { logging } from "../../logging/Logging";
 import { JwtManager } from "../../security/Jwt";
+import { AuthenticationMiddleware } from "../../presentation/http/middlewares/AuthenticationMiddleware";
 
 export const authenticationMiddlewareFactory = async () => {
     const jwt = new JwtManager()

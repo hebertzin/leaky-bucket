@@ -1,7 +1,7 @@
-import { dbConfig } from "../../../infra/config/DbConfig";
-import { MongoDBClient } from "../../../infra/database/MongoDBClient";
-import { MongoPixKeyRepository } from "../../../infra/database/repository/PixRepository";
-import { makeDbAddPixKeyFactory } from "../../../infra/factories/usecases/pix-key/PixKeyUseCaseFactory";
+import { dbConfig } from "../../../config/DbConfig";
+import { MongoDBClient } from "../../../database/MongoDBClient";
+import { MongoPixKeyRepository } from "../../../database/repository/PixRepository";
+import { makeDbAddPixKeyFactory } from "../../../factories/usecases/pix-key/PixKeyUseCaseFactory";
 
 export const pixKeyResolvers = {
     Query: {

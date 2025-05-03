@@ -1,7 +1,7 @@
-import { dbConfig } from "../../../infra/config/DbConfig";
-import { MongoDBClient } from "../../../infra/database/MongoDBClient";
-import { MongoUsersRepository } from "../../../infra/database/repository/UsersRepository";
-import { makeDbSaveUser } from "../../../infra/factories/usecases/users/CreateUserUseCaseFactory";
+import { dbConfig } from "../../../config/DbConfig";
+import { MongoDBClient } from "../../../database/MongoDBClient";
+import { MongoUsersRepository } from "../../../database/repository/UsersRepository";
+import { makeDbSaveUser } from "../../../factories/usecases/users/CreateUserUseCaseFactory";
 
 export const userResolvers = {
     Query: {

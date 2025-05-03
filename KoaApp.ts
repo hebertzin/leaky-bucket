@@ -1,8 +1,8 @@
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import { ApolloServer } from "apollo-server-koa";
-import { schema } from "./src/presentation/graphql/Index";
-import { setupRouter } from "./src/presentation/routes/Routes";
+import { schema } from "./src/infra/presentation/graphql/Index";
+import { setupRouter } from "./src/infra/presentation/http/routes/Routes";
 
 export class KoaApp {
   private koaApp: Koa;

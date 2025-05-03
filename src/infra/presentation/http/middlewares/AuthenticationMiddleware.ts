@@ -1,7 +1,7 @@
 import { Context, Next } from 'koa';
-import { Jwt } from '../../domain/Jwt';
-import { Logging } from '../../domain/Logging';
-import { HttpStatusCode } from '../../domain/HttpStatus';
+import { Jwt } from '../../../../domain/Jwt';
+import { Logging } from '../../../../domain/Logging';
+import { HttpStatusCode } from '../../../../domain/HttpStatus';
 
 export class AuthenticationMiddleware {
     constructor(
