@@ -15,7 +15,11 @@ describe("/api/v1/authentication E2E", () => {
             .post("/api/v1/authentication")
             .send({ email: "hebertsantosdeveloper@gmail.com", password: "20304050" });
         expect(response.status).toBe(HttpStatusCode.Unauthorized);
-        expect(response.body.message).toBe("Invalid credentials")
+        expect(response.body).toMatchObject({
+            title: "Invalid credentials",
+            status: HttpStatusCode.Unauthorized,
+            instance: "/api/v1/authentication"
+        });
     });
 
     it("should return 404 when user not found in database", async () => {
@@ -23,7 +27,11 @@ describe("/api/v1/authentication E2E", () => {
             .post("/api/v1/authentication")
             .send({ email: "invalidUser@gmail.com", password: "20304050" });
         expect(response.status).toBe(404);
-        expect(response.body.message).toBe("User does not exist")
+        expect(response.body).toMatchObject({
+            title: "User does not exist",
+            status: HttpStatusCode.NotFound,
+            instance: "/api/v1/authentication"
+        });
     });
 
     it("Should return 400 when password are missing", async () => {
