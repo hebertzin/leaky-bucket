@@ -1,4 +1,4 @@
-import { PixKey, PixKeyType } from "../PixKey";
+import { PixKey, PixKeyType } from "../entities/PixKey";
 
 export interface PixKeyRepository {
     registerKey(key: PixKey): Promise<void>

@@ -1,4 +1,4 @@
-import { PixKey } from "../../../../domain/PixKey";
+import { PixKey } from "../../../../domain/entities/PixKey";
 
 export const mockPixKey: PixKey = {
     bank: "Banco itau",
