@@ -77,6 +77,20 @@ describe("/api/v1/users E2E", () => {
         });
     });
 
+    it("Should return 400 when  email is invalid", async () => {
+        const response = await request(server)
+            .post("/api/v1/users")
+            .send({ email: "@gmail.com", password: "20304050", name: "Jebert santos" });
+        expect(response.body).toMatchObject({
+            error: "Invalid data",
+            details: [
+                {
+                    "message": "Must be a valid email address"
+                }
+            ]
+
+        });
+    });
     it("Should return 201 and create user correctly", async () => {
         const email = "hebertbackend@gmail.com";
 
