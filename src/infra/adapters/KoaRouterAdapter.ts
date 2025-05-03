@@ -1,5 +1,5 @@
 import { Context } from "koa";
-import { Controller, HttpResponse } from "../domain/Controller";
+import { Controller, HttpResponse } from "../../domain/Controller";
 
 export const adaptRoute = (controller: Controller) => {
     return async (ctx: Context) => {

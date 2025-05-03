@@ -1,5 +1,5 @@
 import Router from "@koa/router";
-import { adaptRoute } from "../../adapters/KoaRouterAdapter";
+import { adaptRoute } from "../../infra/adapters/KoaRouterAdapter";
 import { makePixKeyController } from "../../infra/factories/controllers/pix-key/PixKeyControllerFactory";
 import { makeRemovePixKeyController } from "../../infra/factories/controllers/pix-key/RemovePixKeyControllerFactory";
 import { makeFindPixKeyController } from "../../infra/factories/controllers/pix-key/FindPixKeyControllerFactory";

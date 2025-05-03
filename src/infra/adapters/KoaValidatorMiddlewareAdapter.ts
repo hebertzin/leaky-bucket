@@ -1,7 +1,7 @@
 import { Context, Next } from "koa";
 import { ZodError, z } from "zod";
-import { HttpStatusCode } from "../domain/HttpStatus";
-import { Validator } from "../domain/Validator";
+import { HttpStatusCode } from "../../domain/HttpStatus";
+import { Validator } from "../../domain/Validator";
 
 export class ZodValidator<T> implements Validator<T> {
     private schema: z.ZodSchema<T>;
