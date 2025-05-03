@@ -2,7 +2,6 @@ import { Context, Next } from 'koa';
 import { Jwt } from '../../domain/Jwt';
 import { Logging } from '../../domain/Logging';
 import { HttpStatusCode } from '../../domain/HttpStatus';
-import { JwtPayload } from 'jsonwebtoken';
 
 export class AuthenticationMiddleware {
     constructor(
@@ -10,7 +9,7 @@ export class AuthenticationMiddleware {
         private readonly logger: Logging
     ) { }
 
-    async isAuthorized(ctx: Context, next: Next): Promise<void> {
+    public async isAuthorized(ctx: Context, next: Next): Promise<void> {
         try {
             const authHeader = ctx.headers['authorization'];
             const token = authHeader?.split(' ')[1];
@@ -29,7 +28,6 @@ export class AuthenticationMiddleware {
                 return;
             }
             ctx.state.user = payload;
-            console.log('ctx.state.user:', ctx.state.user);
             await next();
         } catch (error) {
             this.logger.error('[AuthMiddleware] Unexpected error during token verification');
