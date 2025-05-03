@@ -134,7 +134,7 @@ This project utilizes the following technologies:
       "code": 200,
       "message": "Pix key retrieved successfully",
       "data": {
-        "key": "hebertzinmariana0704@gmail.com",
+        "key": "hebertsantosdeveloper@gmail.com",
         "type": "EMAIL",
         "bank": "Inter"
       }
@@ -146,7 +146,7 @@ This project utilizes the following technologies:
   - **Request Example**:
     ```json
     {
-      "key": "hebertzinmariana0704@gmail.com",
+      "key": "hebertsantosdeveloper@gmail.com",
       "type": "EMAIL",
       "bank": "Inter"
     }
@@ -158,7 +158,7 @@ This project utilizes the following technologies:
       "message": "Pix key created successfully",
       "data": {
         "type": "EMAIL",
-        "key": "hebertzinmariana0704@gmail.com"
+        "key": "hebertsantosdeveloper@gmail.com
       }
     }
     ```
@@ -173,7 +173,7 @@ This project utilizes the following technologies:
       "message": "Pix keys retrieved successfully",
       "data": [
         {
-          "key": "hebertzinmariana0704@gmail.com",
+          "key": "hebertsantosdeveloper@gmail.com",
           "type": "EMAIL",
           "bank": "Inter"
         }
