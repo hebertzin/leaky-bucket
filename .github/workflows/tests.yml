@@ -2,9 +2,9 @@ name: Run Tests
 
 on:
   push:
-    branches: [ main, dev , chore-tests-pipeline]
+    branches: [ main, dev]
   pull_request:
-    branches: [ main, dev, chore-tests-pipeline ]
+    branches: [ main, dev ]
 
 jobs:
   test:
@@ -23,7 +23,7 @@ jobs:
         run: npm ci
 
       - name: Start MongoDB with Docker Compose
-        run: docker-compose up -d
+        run: docker-compose up
 
       - name: Wait for MongoDB to be ready
         run: |
