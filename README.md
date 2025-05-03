@@ -32,7 +32,7 @@ cd leaky-bucket
 docker-compose up -d
 
 # Run the development server
-npm run dev
+npm run start:dev
 ```
 
 remember to fill in the .env file correctly, you can see an exemple in .env.exemple file
