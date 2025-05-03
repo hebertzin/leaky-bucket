@@ -10,29 +10,32 @@ export class AuthenticationMiddleware {
     ) { }
 
     public async isAuthorized(ctx: Context, next: Next): Promise<void> {
+        const authHeader = ctx.headers['authorization'];
+        const token = authHeader?.split(' ')[1];
+
+        if (!token) {
+            this.logger.warn('[AuthMiddleware] Missing token in Authorization header');
+            ctx.status = HttpStatusCode.Unauthorized;
+            ctx.body = { message: 'Authentication token is required' };
+            return;
+        }
+
         try {
-            const authHeader = ctx.headers['authorization'];
-            const token = authHeader?.split(' ')[1];
-            if (!token) {
-                this.logger.warn('[AuthMiddleware] Missing token in Authorization header');
+            const payload = this.jwtService.verify(token);
+            this.logger.info(`[AuthMiddleware] Payload: ${JSON.stringify(payload)}`);
+            if (!payload) {
+                this.logger.warn('[AuthMiddleware] Token payload is malformed or missing userId');
                 ctx.status = HttpStatusCode.Unauthorized;
-                ctx.body = { message: 'Authentication token is required' };
+                ctx.body = { message: 'Invalid token payload' };
                 return;
             }
 
-            const payload = this.jwtService.verify(token);
-            if (!payload) {
-                this.logger.warn('[AuthMiddleware] Invalid or expired token');
-                ctx.status = HttpStatusCode.Unauthorized;
-                ctx.body = { message: 'Invalid or expired authentication token' };
-                return;
-            }
             ctx.state.user = payload;
             await next();
         } catch (error) {
-            this.logger.error('[AuthMiddleware] Unexpected error during token verification');
-            ctx.status = HttpStatusCode.InternalServerError;
-            ctx.body = { message: 'Internal server error during authentication' };
+            this.logger.warn(`[AuthMiddleware] Invalid or expired token: ${error}`);
+            ctx.status = HttpStatusCode.Unauthorized;
+            ctx.body = { message: 'Invalid or expired authentication token' };
         }
     }
 }
