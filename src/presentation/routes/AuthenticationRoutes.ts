@@ -1,5 +1,5 @@
 import Router from "@koa/router";
-import { adaptRoute } from "../../adapters/KoaRouterAdapter";
+import { adaptRoute } from "../../infra/adapters/KoaRouterAdapter";
 import { makeAuthenticationController } from "../../infra/factories/controllers/authentication/AuthenticationControllerFactory";
 import { authenticationValidatorMiddleware } from "../validators/AuthenticationValidator";
 

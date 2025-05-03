@@ -1,4 +1,4 @@
-import { DataValidator, ZodValidator } from "../../adapters/KoaValidatorMiddlewareAdapter";
+import { DataValidator, ZodValidator } from "../../infra/adapters/KoaValidatorMiddlewareAdapter";
 import { pixKeySchema } from "./schemas/PixKeySchema";
 
 export const pixKeyValidatorMiddleware = new DataValidator(
