@@ -1,7 +1,7 @@
 import { Request } from "koa";
-import { HttpStatusCode } from "../../../domain/HttpStatus";
-import { Controller, HttpResponse } from "../../../domain/Controller";
-import { FindAllByUserId } from "../../../domain/usecases/FindAllByUserIdUseCase";
+import { FindAllByUserId } from "../../../../../domain/usecases/FindAllByUserIdUseCase";
+import { Controller, HttpResponse } from "../../../../../domain/Controller";
+import { HttpStatusCode } from "../../../../../domain/HttpStatus";
 
 export class FindAllPixKeyByUserIdContoller implements Controller<Request> {
     constructor(private readonly findAllByUserId: FindAllByUserId) { }

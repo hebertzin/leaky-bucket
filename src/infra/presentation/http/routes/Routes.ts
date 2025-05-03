@@ -3,8 +3,8 @@ import { setupPixKeyRouter } from "./PixKeyRoutes";
 import { setupAuthenticationRouter } from "./AuthenticationRoutes";
 import { setupUserRouter } from "./UsersRoutes";
 import { setupProtectedRouter } from "./ProtectedRoutes";
-import { authenticationMiddlewareFactory } from "../../infra/factories/middlewares/AuthenticationMiddlewareFactory";
-import { leakyBucketMiddlewareFactory } from "../../infra/factories/middlewares/LeakyBucketMiddlewareFactory";
+import { leakyBucketMiddlewareFactory } from "../../../factories/middlewares/LeakyBucketMiddlewareFactory";
+import { authenticationMiddlewareFactory } from "../../../factories/middlewares/AuthenticationMiddlewareFactory";
 
 const routes = new Router({
     prefix: "/api/v1",

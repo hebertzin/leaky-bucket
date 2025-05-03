@@ -1,8 +1,9 @@
 import { Request } from "koa";
-import { HttpStatusCode } from "../../../domain/HttpStatus";
-import { Controller, HttpResponse } from "../../../domain/Controller";
-import { AddPixKeyUseCase } from "../../../domain/usecases/PixUseCase";
-import { PixKey } from "../../../domain/entities/PixKey";
+import { Controller, HttpResponse } from "../../../../../domain/Controller";
+import { AddPixKeyUseCase } from "../../../../../domain/usecases/PixUseCase";
+import { PixKey } from "../../../../../domain/entities/PixKey";
+import { HttpStatusCode } from "../../../../../domain/HttpStatus";
+
 
 export class PixKeyContoller implements Controller<Request> {
     constructor(private readonly addPixKeyUseCase: AddPixKeyUseCase) { }

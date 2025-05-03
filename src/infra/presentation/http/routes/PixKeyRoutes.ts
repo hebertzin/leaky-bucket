@@ -1,9 +1,9 @@
 import Router from "@koa/router";
-import { adaptRoute } from "../../infra/adapters/KoaRouterAdapter";
-import { makePixKeyController } from "../../infra/factories/controllers/pix-key/PixKeyControllerFactory";
-import { makeRemovePixKeyController } from "../../infra/factories/controllers/pix-key/RemovePixKeyControllerFactory";
-import { makeFindPixKeyController } from "../../infra/factories/controllers/pix-key/FindPixKeyControllerFactory";
-import { makeFindAllPixKeyController } from "../../infra/factories/controllers/pix-key/FindAllPixKeyByUserIdControllerFactory";
+import { makePixKeyController } from "../../../factories/controllers/pix-key/PixKeyControllerFactory";
+import { makeRemovePixKeyController } from "../../../factories/controllers/pix-key/RemovePixKeyControllerFactory";
+import { makeFindPixKeyController } from "../../../factories/controllers/pix-key/FindPixKeyControllerFactory";
+import { makeFindAllPixKeyController } from "../../../factories/controllers/pix-key/FindAllPixKeyByUserIdControllerFactory";
+import { adaptRoute } from "../../../adapters/KoaRouterAdapter";
 import { pixKeyValidatorMiddleware } from "../validators/PixKeyValidator";
 
 const pixKeyRouter = new Router();

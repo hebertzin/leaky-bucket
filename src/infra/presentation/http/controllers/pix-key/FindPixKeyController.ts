@@ -1,8 +1,7 @@
 import { Request } from "koa";
-import { HttpStatusCode } from "../../../domain/HttpStatus";
-import { Controller, HttpResponse } from "../../../domain/Controller";
-import { FindPixKey } from "../../../domain/usecases/FindPixKeyUseCase";
-import { http } from "winston";
+import { Controller, HttpResponse } from "../../../../../domain/Controller";
+import { FindPixKey } from "../../../../../domain/usecases/FindPixKeyUseCase";
+import { HttpStatusCode } from "../../../../../domain/HttpStatus";
 
 export class FindPixKeyContoller implements Controller<Request> {
     constructor(private readonly findPixKeyUseCase: FindPixKey) { }

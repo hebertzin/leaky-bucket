@@ -47,6 +47,43 @@ describe("/api/v1/pix/query E2E", () => {
         expect(response.body.message).toBe("Pix key created successfully");
     });
 
+    it("Should return 400 when email is invalid", async () => {
+        const response = await request(server)
+            .post("/api/v1/pix/query")
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                type: "EMAIL",
+                key: "@examplee2etest.com",
+                bank: "Inter"
+            });
+
+        expect(response.status).toBe(HttpStatusCode.BadRequest);
+        expect(response.body).toMatchObject({
+            error: "Invalid data",
+            details: [
+                {
+                    "message": "Invalid email format"
+                }
+            ]
+        });
+    });
+
+    it("Should return 209 when pix key already exist", async () => {
+        const existentPixKey = "hebertzinbackend@gmail.com"
+        const response = await request(server)
+            .post("/api/v1/pix/query")
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                type: "EMAIL",
+                key: existentPixKey,
+                bank: "Inter"
+            });
+
+        expect(response.status).toBe(HttpStatusCode.Conflict);
+        expect(response.body.message).toBe("Pix key already exists");
+        expect(response.body.code).toBe(HttpStatusCode.Conflict);
+    });
+
     it("Should return 401 if no token is provided", async () => {
         const response = await request(server)
             .post("/api/v1/pix/query")

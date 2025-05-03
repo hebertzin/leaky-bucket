@@ -1,7 +1,7 @@
 import Router from "@koa/router";
-import { adaptRoute } from "../../infra/adapters/KoaRouterAdapter";
-import { makeAuthenticationController } from "../../infra/factories/controllers/authentication/AuthenticationControllerFactory";
+import { makeAuthenticationController } from "../../../factories/controllers/authentication/AuthenticationControllerFactory";
 import { authenticationValidatorMiddleware } from "../validators/AuthenticationValidator";
+import { adaptRoute } from "../../../adapters/KoaRouterAdapter";
 
 const authenticationRouter = new Router();
 

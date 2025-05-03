@@ -1,7 +1,7 @@
 import { Request } from "koa";
-import { HttpStatusCode } from "../../../domain/HttpStatus";
-import { Controller, HttpResponse } from "../../../domain/Controller";
-import { Login } from "../../../domain/Authentication";
+import { Controller, HttpResponse } from "../../../../../domain/Controller";
+import { Login } from "../../../../../domain/Authentication";
+import { HttpStatusCode } from "../../../../../domain/HttpStatus";
 
 export class AuthenticationController implements Controller<Request> {
     constructor(private readonly authenticationUseCase: Login) { }
