@@ -11,8 +11,7 @@ This challenge has as focus on implementing a leaky bucket strategy similar to t
 - [x] This token must be sent in the request Authorization
 - [x] A multi-tenancy strategy to be the owner of requests. For example, you could have users, and each user will have 10 tokens
 - [x] A leaky bucket strategy completed
-
-- [ ] A mutation that simulates a query of a pix key
+- [x] A mutation that simulates a query of a pix key
 
 ### Leaky Bucket Strategy
 - The query starts with 10 query tokens.
