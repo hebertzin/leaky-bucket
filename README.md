@@ -13,7 +13,7 @@ This project provides a rate-limiting system based on the **Leaky Bucket** algor
 Make sure the following tools are installed on your machine:
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
-- [Node.js](https://nodejs.org/) (for local development, if needed)
+- [Node.js](https://nodejs.org/) 
 
 ---
 
@@ -54,7 +54,7 @@ To deploy this project on a live system, follow these steps:
 3. Run `docker-compose up -d` to start all services.
 4. Configure any environment variables if needed.
 5. The application will now be accessible via your domain.
-6. 
+   
 ---
 
 ## Built With
@@ -158,7 +158,7 @@ This project utilizes the following technologies:
       "message": "Pix key created successfully",
       "data": {
         "type": "EMAIL",
-        "key": "hebertsantosdeveloper@gmail.com
+        "key": "hebertsantosdeveloper@gmail.com"
       }
     }
     ```
