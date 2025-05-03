@@ -25,7 +25,7 @@ export class AuthenticationUseCase implements Login {
             throw new InvalidCredentials("Invalid credentials", HttpStatusCode.Unauthorized);
         }
         try {
-            const token = this.jwtService.sign(existentUser, { expiresIn: '1d' });
+            const token = this.jwtService.sign({ email: existentUser.email, _id: existentUser._id }, { expiresIn: '1d' });
             return { token };
         } catch (error) {
             this.logging.error(`Some internal server error has been ocurred trying log user : ${error}`);
