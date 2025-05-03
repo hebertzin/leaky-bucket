@@ -1,4 +1,4 @@
-import { LeakyBucket } from "../LeakBucket";
+import { LeakyBucket } from "../entities/LeakBucket";
 
 export interface LeakyBucketRepository {
     getByUserId(userId: string): Promise<LeakyBucket | null>;

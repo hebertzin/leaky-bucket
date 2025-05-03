@@ -6,7 +6,6 @@ import { HttpStatusCode } from "../../../domain/HttpStatus";
 import { PixKey } from "../../../domain/entities/PixKey";
 import { FindPixKey } from "../../../domain/usecases/FindPixKeyUseCase";
 
-
 export class FindPixKeyUseCase implements FindPixKey {
     constructor(
         private readonly pixKeyRepository: PixKeyRepository,
