@@ -33,6 +33,7 @@ describe("/api/v1/users E2E", () => {
         const response = await request(server)
             .post("/api/v1/users")
             .send({ email: "", password: "20304050", name: "hebert santos" });
+        expect(response.status).toBe(HttpStatusCode.BadRequest)
         expect(response.body).toMatchObject({
             error: "Invalid data",
             details: [
@@ -51,6 +52,7 @@ describe("/api/v1/users E2E", () => {
         const response = await request(server)
             .post("/api/v1/users")
             .send({ email: "hebertfullstack@gmail.com", password: "", name: "hebert santos" });
+        expect(response.status).toBe(HttpStatusCode.BadRequest)
         expect(response.body).toMatchObject({
             error: "Invalid data",
             details: [
@@ -66,6 +68,7 @@ describe("/api/v1/users E2E", () => {
         const response = await request(server)
             .post("/api/v1/users")
             .send({ email: "hebertfullstack@gmail.com", password: "20304050", name: "" });
+        expect(response.status).toBe(HttpStatusCode.BadRequest)
         expect(response.body).toMatchObject({
             error: "Invalid data",
             details: [
@@ -81,6 +84,7 @@ describe("/api/v1/users E2E", () => {
         const response = await request(server)
             .post("/api/v1/users")
             .send({ email: "@gmail.com", password: "20304050", name: "Jebert santos" });
+        expect(response.status).toBe(HttpStatusCode.BadRequest)
         expect(response.body).toMatchObject({
             error: "Invalid data",
             details: [
@@ -91,12 +95,14 @@ describe("/api/v1/users E2E", () => {
 
         });
     });
+
     it("Should return 201 and create user correctly", async () => {
         const email = "hebertbackend@gmail.com";
 
         const response = await request(server)
             .post("/api/v1/users")
             .send({ email: email, password: "20304050", name: "Hebert santos" });
+
         expect(response.body.code).toBe(HttpStatusCode.Created)
         expect(response.body.data.id).toBeDefined()
     });
