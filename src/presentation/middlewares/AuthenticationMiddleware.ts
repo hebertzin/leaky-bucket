@@ -29,7 +29,6 @@ export class AuthenticationMiddleware {
                 return;
             }
             ctx.state.user = payload;
-            console.log('ctx.state.user:', ctx.state.user);
             await next();
         } catch (error) {
             this.logger.error('[AuthMiddleware] Unexpected error during token verification');

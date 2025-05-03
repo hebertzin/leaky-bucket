@@ -10,12 +10,11 @@ export class PixKeyContoller implements Controller<Request> {
     public async handle({ ctx }: Request): Promise<HttpResponse> {
         try {
             const req = ctx.request.body as Omit<PixKey, "userId">;
-            const userId = ctx.state.user._id;
-            const owner = ctx.state.user.name;
+            const { _id, name } = ctx.state.user;
             const pixKey: PixKey = {
                 ...req,
-                userId,
-                owner
+                userId: _id,
+                owner: name
             };
 
             await this.addPixKeyUseCase.execute(pixKey);
