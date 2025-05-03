@@ -3,7 +3,7 @@ import { FindPixKeyUseCase } from "./FindPixKeyUseCase";
 import type { PixKeyRepository } from "../../../domain/repository/PixRepository";
 import type { Logging } from "../../../domain/Logging";
 import { AppError, NotFound } from "../../errors/Errors";
-import { PixKey } from "../../../domain/PixKey";
+import { PixKey } from "../../../domain/entities/PixKey";
 import { mockPixKey } from "./__mocks__/MockPixKey";
 
 describe("FindPixKeyUseCase", () => {

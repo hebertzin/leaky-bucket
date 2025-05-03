@@ -1,10 +1,8 @@
 import 'dotenv/config'
 import { z } from 'zod'
 import * as dotenv from 'dotenv'
-
 dotenv.config()
 
-dotenv.config()
 const envSchema = z.object({
     PORT: z.coerce.number().default(3000),
     SECRET_JWT: z.string(),

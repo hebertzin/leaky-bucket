@@ -1,9 +1,9 @@
 import { Db } from "mongodb";
-import { PixKey } from "../../../domain/PixKey";
+import { PixKey } from "../../../domain/entities/PixKey";
 import { PixKeyRepository } from "../../../domain/repository/PixRepository";
 
 export class MongoPixKeyRepository implements PixKeyRepository {
-  constructor(private readonly db: Db) {}
+  constructor(private readonly db: Db) { }
 
   private get collection() {
     return this.db.collection<PixKey>("pix_keys");

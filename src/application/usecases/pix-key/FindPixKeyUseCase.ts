@@ -3,7 +3,7 @@ import { PixKeyRepository } from "../../../domain/repository/PixRepository";
 import { Logging } from "../../../domain/Logging";
 import { AppError, NotFound } from "../../errors/Errors";
 import { HttpStatusCode } from "../../../domain/HttpStatus";
-import { PixKey } from "../../../domain/PixKey";
+import { PixKey } from "../../../domain/entities/PixKey";
 import { FindPixKey } from "../../../domain/usecases/FindPixKeyUseCase";
 
 
