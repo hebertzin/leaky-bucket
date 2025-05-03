@@ -89,7 +89,9 @@ This project utilizes the following technologies:
     {
       "code": 200,
       "message": "Authentication successful",
-      "token": "jwt_token"
+      "data": {
+        "token": "jwt_token"
+     }
     }
     ```
 
