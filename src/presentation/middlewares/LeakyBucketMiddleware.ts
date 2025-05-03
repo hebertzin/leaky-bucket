@@ -9,7 +9,7 @@ export class LeakyBucketMiddleware {
         private readonly logger: Logging
     ) { }
 
-    async handle(ctx: Context, next: Next): Promise<void> {
+    public async handle(ctx: Context, next: Next): Promise<void> {
         try {
             const user = ctx.state.user;
             if (!user || !user._id) {
