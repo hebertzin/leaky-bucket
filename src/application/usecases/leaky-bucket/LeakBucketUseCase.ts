@@ -37,10 +37,11 @@ export class LeakyBucketUseCase {
       ? new Date(bucket.lastLeak.getTime() + tokensToAdd * 60 * 60 * 1000)
       : bucket.lastLeak;
 
+    if (updatedTokens <= 0) {
+      return false;
+    }
+
     if (!success) {
-      if (updatedTokens <= 0) {
-        return false;
-      }
       updatedTokens--;
     } else {
       this.logging.debug(`[LeakyBucketUseCase] Processing successful operation for user ${userId}, no token deduction`);
